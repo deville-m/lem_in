@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   r_rotate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/12/12 13:22:55 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:28:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+void	r_rotate(t_roomlist **head)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
-
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
-	{
-		write(1, "ERROR\n", 6);
-		return (1);
-	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	if (!head || !*head)
+		return ;
+	*head = (*head)->prev;
 }

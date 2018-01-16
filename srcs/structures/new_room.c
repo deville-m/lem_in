@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   new_room.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/16 20:03:58 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 20:09:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+t_room	*new_room(char *name, unsigned int x, unsigned int y)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	char	*dup;
+	t_room	*res;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
+	if (!(res = (t_room *)malloc(sizeof(t_room))))
+		return (NULL);
+	if (!(dup = ft_strdup(name)))
 	{
-		write(1, "ERROR\n", 6);
-		return (1);
+		free(res);
+		return (NULL);
 	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	res->name = dup;
+	res->x = x;
+	res->y = y;
+	res->neighbours = NULL;
+	return (res);
 }

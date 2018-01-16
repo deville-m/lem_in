@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   add_back.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/12/12 13:37:11 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:31:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+void	add_back(t_roomlist **head, t_roomlist *elem)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
-
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
-	{
-		write(1, "ERROR\n", 6);
-		return (1);
-	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	if (!head || !elem)
+		return ;
+	add_elem(head, elem);
+	rotate(head);
 }

@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/08/18 15:07:29 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:41:28 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+char	*ft_strcpy(char *dest, const char *src)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	size_t	i;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
+	i = 0;
+	while (src[i])
 	{
-		write(1, "ERROR\n", 6);
-		return (1);
+		dest[i] = src[i];
+		i++;
 	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	dest[i] = '\0';
+	return (dest);
 }

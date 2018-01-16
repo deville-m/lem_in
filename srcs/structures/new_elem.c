@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   new_elem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/12/12 11:52:07 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:36:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 #include "lem_in.h"
 
-int main()
+t_roomlist			*new_elem(t_room *room)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	t_roomlist *res;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
-	{
-		write(1, "ERROR\n", 6);
-		return (1);
-	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	if (!(res = (t_roomlist *)malloc(sizeof(t_roomlist))))
+		return (NULL);
+	res->room = room;
+	return (res);
 }

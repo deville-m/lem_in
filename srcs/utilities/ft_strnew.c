@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/08/21 15:10:39 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:41:06 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+char	*ft_strnew(size_t size)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
-
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
-	{
-		write(1, "ERROR\n", 6);
-		return (1);
-	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	return ((char *)ft_memalloc(size + 1));
 }

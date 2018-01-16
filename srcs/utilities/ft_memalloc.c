@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/08/21 14:56:22 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:42:05 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+void	*ft_memalloc(size_t size)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	unsigned char	*ptr;
+	size_t			i;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
-	{
-		write(1, "ERROR\n", 6);
-		return (1);
-	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	if (size == 0)
+		return (NULL);
+	ptr = (unsigned char *)malloc(sizeof(char) * size);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < size)
+		ptr[i++] = 0;
+	return ((void *)ptr);
 }

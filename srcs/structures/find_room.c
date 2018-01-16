@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find_room.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/12/12 14:53:45 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/16 19:46:00 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "lem_in.h"
 
-int main()
+t_room		*find_room(t_roomlist *head, char *name)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	t_roomlist *curr;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
+	if (!head)
+		return (NULL);
+	curr = head;
+	while (1)
 	{
-		write(1, "ERROR\n", 6);
-		return (1);
+		if (ft_strcmp(curr->room->name, name))
+			return (curr->room);
+		curr = curr->next;
+		if (curr == head)
+			break ;
 	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	return (NULL);
 }

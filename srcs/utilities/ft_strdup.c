@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/16 19:11:52 by mdeville         ###   ########.fr       */
+/*   Created: 2017/08/16 23:45:44 by mdeville          #+#    #+#             */
+/*   Updated: 2017/11/13 18:46:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "lem_in.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int main()
+char	*ft_strdup(const char *s1)
 {
-	t_roomlist	*list;
-	t_room		*start;
-	t_room		*end;
+	size_t	len;
+	size_t	i;
+	char	*res;
 
-	start = NULL;
-	end = NULL;
-	list = parse_room(&start, &end);
-	if (!list)
+	len = ft_strlen(s1);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		write(1, "ERROR\n", 6);
-		return (1);
+		res[i] = s1[i];
+		i++;
 	}
-	parse_connexion(list, start, end);
-	if (!connected(start, end))
-	{
-		write(1, "ERROR\n", 6);
-		return (2);
-	}
-	lem_in(list, start, end);
+	res[i] = '\0';
+	return (res);
 }
