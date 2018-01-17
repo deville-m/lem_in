@@ -1,47 +1,39 @@
 NAME = lem-in
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
-INCLUDES = includes/
+INCLUDES = -Iincludes/ -Ilibft/
+LDLIB = -Llibft/
+LDFLAGS = -lft
 SRCDIR= srcs/
+LIB = libft.a
+LIBDIR = libft
 
-SRC =	main.c \
-\
-		structures/add_back.c \
-		structures/add_elem.c \
-		structures/del_list.c \
-		structures/find_room.c \
-		structures/new_elem.c \
-		structures/r_rotate.c \
-		structures/rotate.c \
-\
-		utilities/ft_strcmp.c \
-		utilities/ft_strcpy.c \
-		utilities/ft_strlen.c \
-		utilities/ft_strdup.c \
-		utilities/ft_strnew.c \
-		utilities/ft_memalloc.c \
-		utilities/get_next_line.c
-
+SRC =	main.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
 
+all: $(NAME)
+
+$(LIBDIR)/$(LIB):
+	$(MAKE) -C $(LIBDIR)
+
 %.o: %.c
 	@zsh -c "echo -n '\tCompiling $<'"
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@zsh -c 'echo -e "\r\t\033[32mCompiled $@\033[0m "'
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBDIR)/$(LIB)
 	@echo "\tLinking $@"
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
+	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $(OBJ) $(LDLIB) $(LDFLAGS)
 
 clean:
-	@rm -f $(OBJ) && echo "Removed object files."
+	@rm -f $(OBJ) && $(MAKE) -C $(LIBDIR) clean && echo "Removed object files."
 
 fclean: clean
-	@rm -f $(NAME) && echo "Removed target(s)."
+	@rm -f $(NAME) && $(MAKE) -C $(LIBDIR) fclean && echo "Removed target(s)."
 
 re: fclean
 	@$(MAKE)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(LIBDIR)/$(LIB)
