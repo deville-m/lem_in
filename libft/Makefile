@@ -132,8 +132,9 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	@echo "Compiling $^"
-	@$(CC) $(CFLAGS) -c $(INCLUDES) -o $@ $^
+	@zsh -c "echo -n '\tCompiling $<'"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@zsh -c 'echo -e "\r\t\033[32mCompiled $@\033[0m "'
 
 $(NAME): $(OBJ)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJ)
