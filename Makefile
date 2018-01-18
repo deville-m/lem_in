@@ -1,14 +1,19 @@
 NAME = lem-in
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
-INCLUDES = -Iincludes/ -Ilibft/
+INCLUDES = -Iincludes/ -Ilibft/includes
 LDLIB = -Llibft/
 LDFLAGS = -lft
 SRCDIR= srcs/
 LIB = libft.a
 LIBDIR = libft
 
-SRC =	main.c
+SRC =	main.c \
+		parse/checking.c \
+		parse/parse.c \
+		output/print_graph.c \
+		structure/find_room.c \
+		structure/free_room.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
