@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 19:34:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:49:10 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 
 static void			parse_room(t_list **list, char *line)
 {
+	char	*to_free;
 	t_room	res;
 	size_t	i;
 
+	to_free = line;
 	i = 0;
 	while (line[i] != ' ')
 		i++;
@@ -35,6 +37,7 @@ static void			parse_room(t_list **list, char *line)
 	res.y = ft_atou(line);
 	res.neighbours = NULL;
 	ft_lstadd(list, ft_lstnew(&res, sizeof(res)));
+	free(to_free);
 }
 
 static void			parse_command(
@@ -52,7 +55,6 @@ static void			parse_command(
 	if (is_room(line))
 	{
 		parse_room(list, line);
-		free(line);
 		if (command == 1)
 			*start = (t_room *)(*list)->content;
 		else if (command == 2)
@@ -74,6 +76,7 @@ static void			parse_connexion(t_list *list, char *line)
 	tmp2 = find_room(list, line);
 	ft_lstadd(&tmp1->neighbours, ft_lstlink(tmp2, sizeof(t_room)));
 	ft_lstadd(&tmp2->neighbours, ft_lstlink(tmp1, sizeof(t_room)));
+	free(first);
 }
 
 static inline int	first_line(t_list *list, char *line)
@@ -90,7 +93,6 @@ static inline int	first_line(t_list *list, char *line)
 	else if (is_valid_connexion(list, line))
 	{
 		parse_connexion(list, line);
-		free(line);
 		norm = 1;
 	}
 	return (norm);

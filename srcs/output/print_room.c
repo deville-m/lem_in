@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_graph.c                                      :+:      :+:    :+:   */
+/*   print_room.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/18 14:02:44 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 19:34:36 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/19 00:20:18 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/19 00:35:05 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include "lst.h"
 #include "ft_printf.h"
+#include "lst.h"
 
-void	print_room(t_room *room)
+void	print_room(t_list *elem)
 {
-	t_room	*tmp;
-	t_list	*list;
+	t_list *list;
 
-	ft_printf("%s:\n", room->name);
-	list = room->neighbours;
+	ft_printf("%s:\n", ((t_room *)elem->content)->name);
+	list = ((t_room *)elem->content)->neighbours;
 	while (list)
 	{
-		tmp = (t_room *)list->content;
-		ft_printf("\t%s\n", tmp->name);
+		ft_printf("  %s\n", ((t_room *)list->content)->name);
 		list = list->next;
 	}
-}
-
-void	print_graph(t_list *list)
-{
-	while (list)
-	{
-		print_room((t_room *)list->content);
-		list = list->next;
-	}
+	ft_printf("\n");
 }

@@ -11,7 +11,7 @@ LIBDIR = libft
 SRC =	main.c \
 		parse/checking.c \
 		parse/parse.c \
-		output/print_graph.c \
+		output/print_room.c \
 		structure/find_room.c \
 		structure/free_room.c
 

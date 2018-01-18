@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 19:37:29 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 00:30:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void					lem_in(
 ** Output functions
 */
 
-void					print_graph(t_list *list);
-void					print_room(t_room *room);
+void					print_room(t_list *list);
 
 #endif
