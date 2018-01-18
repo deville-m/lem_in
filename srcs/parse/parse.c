@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 19:28:03 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:34:18 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "conversion.h"
 #include "get_next_line.h"
 #include "ft_printf.h"
-
-
 
 static void			parse_room(t_list **list, char *line)
 {

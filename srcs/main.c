@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 18:06:28 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:37:55 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "lem_in.h"
 #include "ft_printf.h"
 
-int main()
+int	main(void)
 {
 	t_list			*list;
 	t_room			*start;
@@ -39,12 +39,11 @@ int main()
 	start = NULL;
 	end = NULL;
 	list = parse(&start, &end);
-	if (!list || !start || !end /*|| !connected(start, end)*/)
+	if (!list || !start || !end)
 	{
 		ft_printf("ERROR\n");
 		return (1);
 	}
-//	lem_in(list, start, end);
 	print_graph(list);
 	ft_lstdel(&list, free_room);
 }

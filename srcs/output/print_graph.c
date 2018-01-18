@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 14:02:44 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 14:11:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:34:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	print_room(t_room *room)
 {
 	t_room	*tmp;
-	t_list *list;
+	t_list	*list;
 
 	ft_printf("%s:\n", room->name);
 	list = room->neighbours;
