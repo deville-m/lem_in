@@ -6,17 +6,12 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 14:10:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 15:41:41 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_string.h"
-#include "lst.h"
-#include "get_next_line.h"
-#include "conversion.h"
 #include "lem_in.h"
-#include "ft_printf.h"
 
 static int	get_nbant(unsigned int *nbant)
 {
@@ -30,9 +25,10 @@ static int	get_nbant(unsigned int *nbant)
 		|| !(*nbant = ft_atoi(tmp)))
 	{
 		free(tmp);
-		ft_printf("ERROR\n");
+		ft_fprintf(2, "ERROR\n");
 		return (0);
 	}
+	ft_printf("%d\n", *nbant);
 	free(tmp);
 	return (1);
 }
@@ -51,7 +47,7 @@ int		main(void)
 	list = parse(&start, &end);
 	if (!list || !start || !end || !is_connected(start, end))
 	{
-		ft_printf("ERROR\n");
+		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
 	ft_lstiter(list, print_room);

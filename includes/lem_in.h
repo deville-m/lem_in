@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 14:11:11 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 15:10:51 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define LEM_IN_H
 
 # include <unistd.h>
-
-typedef struct s_list	t_list;
+#include "ft_string.h"
+#include "lst.h"
+#include "get_next_line.h"
+#include "conversion.h"
+#include "ft_printf.h"
 
 typedef struct			s_room
 {

@@ -6,17 +6,12 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/18 21:49:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 15:42:20 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lem_in.h"
-#include "lst.h"
-#include "ft_string.h"
-#include "conversion.h"
-#include "get_next_line.h"
-#include "ft_printf.h"
 
 static void			parse_room(t_list **list, char *line)
 {
@@ -24,6 +19,7 @@ static void			parse_room(t_list **list, char *line)
 	t_room	res;
 	size_t	i;
 
+	ft_printf("%s\n", line);
 	to_free = line;
 	i = 0;
 	while (line[i] != ' ')
@@ -49,6 +45,9 @@ static void			parse_command(
 	int command;
 
 	command = is_command(line);
+	if (command == 3)
+		return ;
+	ft_printf("%s\n", line);
 	free(line);
 	while (get_next_line(0, &line) == 1 && is_comment(line))
 		free(line);
@@ -74,6 +73,7 @@ static void			parse_connexion(t_list *list, char *line)
 	line += 1;
 	tmp1 = find_room(list, first);
 	tmp2 = find_room(list, line);
+	ft_printf("%s-%s\n", first, line);
 	ft_lstadd(&tmp1->neighbours, ft_lstlink(tmp2, sizeof(t_room)));
 	ft_lstadd(&tmp2->neighbours, ft_lstlink(tmp1, sizeof(t_room)));
 	free(first);
