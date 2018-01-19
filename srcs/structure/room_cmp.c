@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstpop.c                                        :+:      :+:    :+:   */
+/*   room_cmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 18:27:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 18:21:39 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/19 18:25:09 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/19 18:28:35 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lst.h"
-#include <stdlib.h>
+#include "lem_in.h"
 
-t_list	*ft_lstpop(t_list **alst)
+int		room_cmp(const void *s1, const void *s2)
 {
-	t_list	*res;
+	char	*c1;
 
-	if (!alst || !*alst)
-		return (NULL);
-	res = *alst;
-	*alst = (*alst)->next;
-	res->next = NULL;
-	return (res);
+	c1 = ((t_room *)s1)->name;
+	return (ft_strcmp(c1, s2));
 }

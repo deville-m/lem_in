@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:11:16 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 15:10:23 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/19 18:28:06 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstlink(void *content, size_t content_size);
-void				*ft_lstpop(t_list **alst, size_t *content_size);
+t_list				*ft_lstpop(t_list **alst);
+t_list				*ft_lstremove(
+								t_list **head,
+								void *data,
+								int (*cmp)(const void *, const void *));
 void				ft_lstreverse(t_list **alst);
 
 #endif

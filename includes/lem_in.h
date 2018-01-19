@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 17:46:19 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 18:29:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_room					*find_room(t_list *head, char *name);
 int						is_connected(t_room *start, t_room *end);
 
 void					free_room(void *room, size_t room_size);
+int						room_cmp(const void *s1, const void *s2);
 
 /*
 ** Parsing related functions

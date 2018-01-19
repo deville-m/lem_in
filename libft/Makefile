@@ -75,6 +75,7 @@ SRC = srcs/conversion/ft_atoi.c \
 	srcs/lst/ft_lstnew.c \
 	srcs/lst/ft_lstpop.c \
 	srcs/lst/ft_lstreverse.c \
+	srcs/lst/ft_lstremove.c \
 	srcs/memory/ft_bzero.c \
 	srcs/memory/ft_memalloc.c \
 	srcs/memory/ft_memccpy.c \

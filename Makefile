@@ -15,6 +15,7 @@ SRC =	main.c \
 		structure/find_room.c \
 		structure/free_room.c \
 		structure/is_connected.c \
+		structure/room_cmp.c \
 		algo/dijkstra.c \
 		algo/astart.c
 
