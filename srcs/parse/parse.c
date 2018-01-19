@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 17:44:31 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 21:51:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void			parse_room(t_list **list, char *line)
 		line++;
 	res.y = ft_atou(line);
 	res.neighbours = NULL;
+	res.removed = NULL;
 	ft_lstadd(list, ft_lstnew(&res, sizeof(res)));
 	free(to_free);
 }

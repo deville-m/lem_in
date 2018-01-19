@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 19:11:20 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 21:47:55 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct			s_room
 	unsigned int		x;
 	unsigned int		y;
 	t_list				*neighbours;
+	t_list				*removed;
 }						t_room;
 
 # define	ROOM(x) ((t_room *)x->content)
@@ -38,6 +39,7 @@ typedef struct			s_room
 t_room					*find_room(t_list *head, char *name);
 
 int						is_connected(t_room *start, t_room *end);
+void					disconnect(t_room *room, t_room *neighbour);
 
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
@@ -57,17 +59,20 @@ t_list					*parse(t_room **start, t_room **end);
 ** Solving related functions
 */
 
-void					lem_in(
+t_list					*solve(
 							t_list *list,
 							t_room *start,
 							t_room *end);
 
-							void	ft_get_cost(t_list *list, t_room *end);
+void					lem_in(
+							t_list **result,
+							unsigned int nbant);
 
 /*
 ** Output functions
 */
 
+void					print_path(t_list *elem);
 void					print_room(t_list *room);
 void					print_elem(t_list *elem);
 

@@ -71,6 +71,7 @@ SRC = srcs/conversion/ft_atoi.c \
 	srcs/lst/ft_lstfilter.c \
 	srcs/lst/ft_lstiter.c \
 	srcs/lst/ft_lstlink.c \
+	srcs/lst/ft_lstlen.c \
 	srcs/lst/ft_lstmap.c \
 	srcs/lst/ft_lstnew.c \
 	srcs/lst/ft_lstpop.c \

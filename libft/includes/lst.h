@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:11:16 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 18:28:06 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 20:20:40 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_list				*ft_lstremove(
 								void *data,
 								int (*cmp)(const void *, const void *));
 void				ft_lstreverse(t_list **alst);
+size_t				ft_lstlen(t_list *list);
 
 #endif
