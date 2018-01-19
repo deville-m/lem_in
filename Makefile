@@ -1,6 +1,6 @@
 NAME = lem-in
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -Iincludes/ -Ilibft/includes
 LDLIB = -Llibft/
 LDFLAGS = -lft
@@ -21,7 +21,7 @@ OBJ := $(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBDIR)/$(LIB):
-	$(MAKE) -C $(LIBDIR)
+	@$(MAKE) -C $(LIBDIR)
 
 %.o: %.c
 	@zsh -c "echo -n '\tCompiling $<'"
@@ -29,7 +29,7 @@ $(LIBDIR)/$(LIB):
 	@zsh -c 'echo -e "\r\t\033[32mCompiled $@\033[0m "'
 
 $(NAME): $(OBJ) $(LIBDIR)/$(LIB)
-	@echo "\tLinking $@"
+	@echo -e "\tLinking $@"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $(OBJ) $(LDLIB) $(LDFLAGS)
 
 clean:
@@ -38,7 +38,6 @@ clean:
 fclean: clean
 	@rm -f $(NAME) && $(MAKE) -C $(LIBDIR) fclean && echo "Removed target(s)."
 
-re: fclean
-	@$(MAKE)
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re $(LIBDIR)/$(LIB)

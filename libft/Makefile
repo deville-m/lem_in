@@ -1,6 +1,6 @@
 NAME=libft.a
 CC= gcc
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror
 INCLUDES=-Iincludes/
 AR=ar
 ARFLAGS=-rcs
