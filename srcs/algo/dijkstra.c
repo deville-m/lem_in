@@ -1,45 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_connected.c                                     :+:      :+:    :+:   */
+/*   dijkstra.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 12:54:05 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 17:37:16 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/19 17:14:40 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/19 17:44:12 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "lem_in.h"
-#include "lst.h"
 
-static int	recursion(t_list **lst, t_room *curr, t_room *goal)
+static void	set_cost(t_list *elem)
 {
-	t_list	*walk;
+	ROOM(elem)->cost = UINT_MAX;
+}
 
-	if (curr == goal)
-		return (1);
-	ft_lstadd(lst, ft_lstlink(curr, sizeof(curr)));
+static void	recursion(t_room *curr)
+{
+	t_list *walk;
+
 	walk = curr->neighbours;
 	while (walk)
 	{
-		if (!find_room(*lst, ((t_room *)walk->content)->name))
+		if (curr->cost + 1 < ROOM(walk)->cost)
 		{
-			if (recursion(lst, (t_room *)walk->content, goal))
-				return (1);
+			ROOM(walk)->cost = curr->cost + 1;
+			recursion(ROOM(walk));
 		}
 		walk = walk->next;
 	}
-	return (0);
 }
 
-int			is_connected(t_room *start, t_room *end)
+void		dijkstra(t_list *nodes, t_room *start)
 {
-	t_list	*history;
-	int		ret;
-
-	history = NULL;
-	ret = recursion(&history, start, end);
-	ft_lstdel(&history, NULL);
-	return (ret);
+	if (!start)
+		return ;
+	ft_lstiter(nodes, set_cost);
+	start->cost = 0;
+	recursion(start);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 00:20:18 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 00:35:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 17:47:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_room(t_list *elem)
 {
 	t_list *list;
 
-	ft_printf("%s:\n", ((t_room *)elem->content)->name);
+	ft_printf("%s - %u:\n", ((t_room *)elem->content)->name, ROOM(elem)->cost);
 	list = ((t_room *)elem->content)->neighbours;
 	while (list)
 	{

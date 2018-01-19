@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 17:12:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 17:46:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,12 @@ void					lem_in(
 */
 
 void					print_room(t_list *list);
+
+
+/*
+** Algo
+*/
+
+void					dijkstra(t_list *nodes, t_room *start);
 
 #endif
