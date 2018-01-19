@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 16:49:58 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 17:12:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 
 typedef struct			s_room
 {
+	unsigned int		cost;
 	char				*name;
 	unsigned int		x;
 	unsigned int		y;
 	t_list				*neighbours;
 }						t_room;
+
+# define	ROOM(x) ((t_room *)x->content)
 
 /*
 ** Graph related functions
@@ -57,6 +60,8 @@ void					lem_in(
 							t_list *list,
 							t_room *start,
 							t_room *end);
+
+							void	ft_get_cost(t_list *list, t_room *end);
 
 /*
 ** Output functions
