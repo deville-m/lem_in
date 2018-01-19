@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 00:55:21 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 14:10:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		main(void)
 	start = NULL;
 	end = NULL;
 	list = parse(&start, &end);
-	if (!list || !start || !end)
+	if (!list || !start || !end || !is_connected(start, end))
 	{
 		ft_printf("ERROR\n");
 		return (1);

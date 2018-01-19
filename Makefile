@@ -13,7 +13,8 @@ SRC =	main.c \
 		parse/parse.c \
 		output/print_room.c \
 		structure/find_room.c \
-		structure/free_room.c
+		structure/free_room.c \
+		structure/is_connected.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
@@ -29,7 +30,7 @@ $(LIBDIR)/$(LIB):
 	@zsh -c 'echo -e "\r\t\033[32mCompiled $@\033[0m "'
 
 $(NAME): $(OBJ) $(LIBDIR)/$(LIB)
-	@echo -e "\tLinking $@"
+	@echo "\tLinking $@"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $(OBJ) $(LDLIB) $(LDFLAGS)
 
 clean:
