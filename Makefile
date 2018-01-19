@@ -14,7 +14,8 @@ SRC =	main.c \
 		output/print_room.c \
 		structure/find_room.c \
 		structure/free_room.c \
-		structure/is_connected.c
+		structure/is_connected.c \
+		algo/astart.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
