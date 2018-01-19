@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 16:37:33 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 15:41:41 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/19 16:49:28 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_nbant(unsigned int *nbant)
 	return (1);
 }
 
-int		main(void)
+int			main(void)
 {
 	t_list			*list;
 	t_room			*start;
