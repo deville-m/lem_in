@@ -18,7 +18,6 @@ SRC =	main.c \
 		structure/is_connected.c \
 		structure/room_cmp.c \
 		algo/dijkstra.c \
-		algo/astart.c \
 		algo/path_finding.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
