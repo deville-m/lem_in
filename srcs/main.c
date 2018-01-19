@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 18:30:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/19 19:15:49 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ int			main(void)
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
-	dijkstra(list, start);
-	tmp = ft_lstremove(&list, "2", room_cmp);
+	ft_printf("Start: %s / end: %s\n", start->name, end->name);
+	tmp = path_finding(list, start, end);
 	ft_lstiter(list, print_room);
+	ft_lstiter(tmp, print_elem);
 	ft_lstdel(&list, free_room);
 }

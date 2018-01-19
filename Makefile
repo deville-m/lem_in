@@ -12,12 +12,14 @@ SRC =	main.c \
 		parse/checking.c \
 		parse/parse.c \
 		output/print_room.c \
+		output/print_elem.c \
 		structure/find_room.c \
 		structure/free_room.c \
 		structure/is_connected.c \
 		structure/room_cmp.c \
 		algo/dijkstra.c \
-		algo/astart.c
+		algo/astart.c \
+		algo/path_finding.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
