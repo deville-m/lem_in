@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 10:03:16 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 16:49:41 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/20 12:31:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,11 @@ int		is_valid_connexion(t_list *list, char *line)
 		if (*line == '-')
 		{
 			*line = '\0';
-			if (find_room(list, tmp[0]))
-			{
-				line++;
-				break ;
-			}
+			if (find_room(list, tmp[0]) && find_room(list, line + 1))
+				return (1);
 			*line++ = '-';
 		}
 	}
 	tmp[1] = line;
-	return (find_room(list, tmp[0]) && find_room(list, tmp[1]));
+	return (0);
 }
