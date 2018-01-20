@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 21:49:43 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/20 14:22:05 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int			main(void)
 		return (1);
 	}
 	ft_printf("Start: %s / end: %s\n", start->name, end->name);
-	disconnect(find_room(list, "3"), find_room(list, "4"));
+	// disconnect(find_room(list, "3"), find_room(list, "4"));
 	ft_lstiter(list, print_room);
-//	result = solve(list, start, end);
-//	ft_lstiter(result, print_path);
+	result = solve(list, start, end);
+	ft_lstiter(result, print_path);
 	// lem_in(result, nbant);
 	ft_lstdel(&list, free_room);
 }

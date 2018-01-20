@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 21:22:04 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/20 15:08:21 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 t_list	*path_finding(t_list *list, t_room *start, t_room *end)
 {
-	t_list *res;
-	t_list *tmp;
+	t_room	*goal;
+	t_list	*res;
+	t_list	*tmp;
 
 	if (!list || !start || !end)
 		return (NULL);
 	res = NULL;
+	goal = end;
 	dijkstra(list, start);
 	while (end != start)
 	{
@@ -33,7 +35,8 @@ t_list	*path_finding(t_list *list, t_room *start, t_room *end)
 			ft_lstdel(&res, NULL);
 			break ;
 		}
-		ft_lstadd(&res, ft_lstlink(end, sizeof(end)));
+		if (end != goal)
+			ft_lstadd(&res, ft_lstlink(end, sizeof(end)));
 		end = ROOM(tmp);
 	}
 	if (end == start)
