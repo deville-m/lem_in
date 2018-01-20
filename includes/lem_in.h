@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 21:47:55 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/20 22:09:07 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_room
 }						t_room;
 
 # define	ROOM(x) ((t_room *)x->content)
+# define	LIST(x) ((t_list *)x->content)
 
 /*
 ** Graph related functions
@@ -39,10 +40,11 @@ typedef struct			s_room
 t_room					*find_room(t_list *head, char *name);
 
 int						is_connected(t_room *start, t_room *end);
-void					disconnect(t_room *room, t_room *neighbour);
+void					disconnect(t_room *room);
 
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
+t_room					*find_double(t_list *p1, t_list *p2);
 
 /*
 ** Parsing related functions
