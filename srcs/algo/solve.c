@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 16:14:53 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 19:22:59 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_room	*path_cmp(t_list *l1, t_list *l2)
 
 /* find_route return tout les groupes possible qu'il peut constituer avec l'ensemble des path qu'on lui donne en parametre */
 
-t_list	*find_route(t_list *result)
+t_list	*find_route(t_list *result, int maxpath)
 {
 	t_list	*tmp;
 	t_list	*route;

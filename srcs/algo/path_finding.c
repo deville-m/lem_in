@@ -6,13 +6,23 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/20 15:08:21 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 19:36:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_list	*path_finding(t_list *list, t_room *start, t_room *end)
+static inline t_list	*get_next(t_room *end)
+{
+	t_list *tmp;
+
+	tmp = end->neighbours;
+	while (tmp && ROOM(tmp)->cost != end->cost - 1)
+		tmp = tmp->next;
+	return (tmp);
+}
+
+t_list					*path_finding(t_list *list, t_room *start, t_room *end)
 {
 	t_room	*goal;
 	t_list	*res;
@@ -25,11 +35,7 @@ t_list	*path_finding(t_list *list, t_room *start, t_room *end)
 	dijkstra(list, start);
 	while (end != start)
 	{
-		tmp = end->neighbours;
-		while (tmp && ROOM(tmp)->cost != end->cost - 1)
-		{
-			tmp = tmp->next;
-		}
+		tmp = get_next(end);
 		if (!tmp)
 		{
 			ft_lstdel(&res, NULL);
