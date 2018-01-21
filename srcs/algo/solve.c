@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 20:32:51 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 21:27:20 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ t_room	*path_cmp(t_list *l1, t_list *l2)
 	return (NULL);
 }
 
+// t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
+// {
+// 	t_list	*tmp;
+// 	t_list	*result;
+//
+// 	tmp = begin->neighbours;
+// 	result = NULL;
+// 	while (tmp)
+// 	{
+// 		ft_lstadd(&result,
+// 				ft_lstlink(path_finding(list, ROOM(tmp), goal), sizeof(t_room)));
+// 		tmp = tmp->next;
+// 	}
+// 	return (result);
+// }
+
 t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
 {
 	size_t	score;
@@ -65,16 +81,16 @@ t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
 			if ((find = path_finding(list, ROOM(tmp), goal)))
 			{
 				if (result)
-					score = score_it(result, 10);
+					score = score_it(result, 1);
 				ft_lstadd(&result,
 					ft_lstlink(find, sizeof(t_room)));
-				if (score < score_it(result, 10))
+				if (score < score_it(result, 1))
 					free(ft_lstpop(&result));
 				congestion(find);
 			}
 			tmp = tmp->next;
 		}
-		best = (!best) ? result : (score_it(result, 10) < score_it(best, 10)) ? result : best;
+		best = (!best) ? result : (score_it(result, 1) < score_it(best, 1)) ? result : best;
 		disconnect(begin);
 		ft_lstiter(list, reconnect);
 		try = try->next;
@@ -91,6 +107,7 @@ t_list	*solve(t_list *list, t_room *start, t_room *end)
 	result = NULL;
 	begin = (ft_lstlen(start->neighbours) <= ft_lstlen(end->neighbours)) ?
 		start : end;
+	ft_printf("BEGIN = %s | len start = %d | len end = %d\n", (begin == start) ? "start" : "end", ft_lstlen(start->neighbours), ft_lstlen(end->neighbours));
 	maxpath = ft_lstlen(begin->neighbours);
 	disconnect(begin);
 	result = get_path(list, begin, (begin == start) ? end : start);
