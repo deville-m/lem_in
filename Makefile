@@ -22,7 +22,8 @@ SRC =	main.c \
 		structure/room_cmp.c \
 		algo/dijkstra.c \
 		algo/path_finding.c \
-		algo/solve.c
+		algo/solve.c \
+		algo/score.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)

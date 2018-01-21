@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 15:33:55 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 17:04:29 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	get_nbant(unsigned int *nbant)
 
 int			main(void)
 {
+	size_t			score;
 	t_list			*result;
 	t_list			*list;
 	t_room			*start;
@@ -53,6 +54,8 @@ int			main(void)
 	}
 	result = solve(list, start, end);
 	ft_lstiter(list, reconnect);
+	score = score_it(result, nbant);
+	ft_printf("score = %zd\n", score);
 	ft_lstiter(list, print_room);
 	ft_lstiter(result, print_path);
 	// lem_in(result, nbant);
