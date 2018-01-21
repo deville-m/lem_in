@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 16:14:53 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 17:41:42 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,40 +54,20 @@ t_list	*find_route(t_list *result)
 	return (NULL);
 }
 
-t_room	*find_double(t_list *p1, t_list *p2)
+t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
 {
-	t_list	*origin;
-
-	origin = p2;
-	while (p1)
-	{
-		p2 = origin;
-		while (p2)
-		{
-			if (p2->content == p1->content)
-				return (ROOM(p1));
-			p2 = p2->next;
-		}
-		p1 = p1->next;
-	}
-	return (NULL);
-}
-
-size_t	get_path(t_list *list, t_room *begin, t_room *goal, t_list **result)
-{
-	size_t	i;
 	t_list	*tmp;
+	t_list	*result;
 
 	tmp = begin->neighbours;
-	i = 0;
+	result = NULL;
 	while (tmp)
 	{
-		ft_lstadd(result,
+		ft_lstadd(&result,
 				ft_lstlink(path_finding(list, ROOM(tmp), goal), sizeof(t_room)));
-		i++;
 		tmp = tmp->next;
 	}
-	return (i);
+	return (result);
 }
 
 t_list	*solve(t_list *list, t_room *start, t_room *end)
@@ -102,9 +82,11 @@ t_list	*solve(t_list *list, t_room *start, t_room *end)
 		start : end;
 	maxpath = ft_lstlen(begin->neighbours);
 	disconnect(begin);
-	get_path(list, begin, (begin == start) ? end : start, &result);
+	result = get_path(list, begin, (begin == start) ? end : start);
 	cmp = path_cmp(result, result->next);
 	if (cmp)
+	{
 		ft_printf("cmp = %s\n", cmp->name);
+	}
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 15:28:25 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 17:03:52 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_list					*path_finding(
 									t_list *nodes,
 									t_room *start,
 									t_room *end);
+size_t						score_it(t_list *route, unsigned int nbant);
 
 #endif
