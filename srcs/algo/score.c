@@ -1,5 +1,18 @@
 #include "lem_in.h"
 
+size_t	try_score(t_list *find, t_list *route, unsigned int nbant)
+{
+	size_t	score;
+	t_list	*try;
+
+	try = route;
+	ft_lstadd(&route, find);
+	score = score_it(try, nbant);
+	find->next = NULL;
+	return (score);
+}
+
+
 size_t	score_it(t_list *route, unsigned int nbant)
 {
 	size_t	maxlen;
