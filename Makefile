@@ -18,6 +18,7 @@ SRC =	main.c \
 		structure/free_room.c \
 		structure/is_connected.c \
 		structure/disconnect.c \
+		structure/reconnect.c \
 		structure/room_cmp.c \
 		algo/dijkstra.c \
 		algo/path_finding.c \

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/20 22:09:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:28:25 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_room					*find_room(t_list *head, char *name);
 
 int						is_connected(t_room *start, t_room *end);
 void					disconnect(t_room *room);
+void					reconnect(t_list *elem);
 
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
