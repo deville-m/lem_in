@@ -6,11 +6,12 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 21:27:20 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 22:17:49 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <limits.h>
 
 void	congestion(t_list *path)
 {
@@ -61,7 +62,7 @@ t_room	*path_cmp(t_list *l1, t_list *l2)
 // 	return (result);
 // }
 
-t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
+t_list	*get_path(t_list *list, t_room *begin, t_room *goal, unsigned nbant)
 {
 	size_t	score;
 	t_list	*try;
@@ -75,30 +76,39 @@ t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
 	while (try)
 	{
 		result = NULL;
-		tmp = begin->neighbours;
+		tmp = try;
+		score = INT_MAX;
 		while (tmp)
 		{
 			if ((find = path_finding(list, ROOM(tmp), goal)))
 			{
 				if (result)
-					score = score_it(result, 1);
+					score = score_it(result, nbant);
 				ft_lstadd(&result,
 					ft_lstlink(find, sizeof(t_room)));
-				if (score < score_it(result, 1))
+				if (score <= score_it(result, nbant))
 					free(ft_lstpop(&result));
 				congestion(find);
 			}
 			tmp = tmp->next;
 		}
-		best = (!best) ? result : (score_it(result, 1) < score_it(best, 1)) ? result : best;
-		disconnect(begin);
+		if (!best)
+			best = result;
+		else if (score_it(result, nbant) < score_it(best, nbant))
+		{
+			ft_lstdel(&best, NULL);
+			best = result;
+		}
+		else
+			ft_lstdel(&result, NULL);
 		ft_lstiter(list, reconnect);
+		disconnect(begin);
 		try = try->next;
 	}
 	return (best);
 }
 
-t_list	*solve(t_list *list, t_room *start, t_room *end)
+t_list	*solve(t_list *list, t_room *start, t_room *end, unsigned nbant)
 {
 	t_list	*result;
 	size_t	maxpath;
@@ -110,6 +120,7 @@ t_list	*solve(t_list *list, t_room *start, t_room *end)
 	ft_printf("BEGIN = %s | len start = %d | len end = %d\n", (begin == start) ? "start" : "end", ft_lstlen(start->neighbours), ft_lstlen(end->neighbours));
 	maxpath = ft_lstlen(begin->neighbours);
 	disconnect(begin);
-	result = get_path(list, begin, (begin == start) ? end : start);
+	result = get_path(list, begin, (begin == start) ? end : start, nbant);
+	/* Faire une fonction qui reverse toute les paths de result lorsque begin == end */
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 20:14:45 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 21:43:39 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ t_list					*parse(t_room **start, t_room **end);
 ** Solving related functions
 */
 
-t_list					*solve(
-							t_list *list,
-							t_room *start,
-							t_room *end);
+t_list				*solve(t_list *list, t_room *start, t_room *end, unsigned nbant);
 
 void					lem_in(
 							t_list **result,

@@ -37,5 +37,5 @@ size_t	score_it(t_list *route, unsigned int nbant)
 			nbant = 0;
 		list = list->next;
 	}
-	return (maxlen + nbant / ft_lstlen(route) + nbant % ft_lstlen(route));
+	return (maxlen + nbant / ft_lstlen(route));
 }

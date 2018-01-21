@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 21:16:20 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/21 22:09:55 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,28 @@ static int	get_nbant(unsigned int *nbant)
 	return (1);
 }
 
+void	init_ant(t_room *start, t_room **ant, unsigned nbant)
+{
+	unsigned	i;
+
+	i = 0;
+	while (i < nbant)
+	{
+		ant[i++] = start;
+	}
+	ant[i] = NULL;
+}
+
 int			main(void)
 {
-	size_t			score;
 	t_list			*result;
 	t_list			*list;
 	t_room			*start;
 	t_room			*end;
 	unsigned int	nbant;
+	// t_room			*ant[get_nbant(&nbant) + 1];
 
+	// (void)ant;
 	if (!get_nbant(&nbant))
 		return (1);
 	start = NULL;
@@ -52,12 +65,12 @@ int			main(void)
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
-	result = solve(list, start, end);
+	// init_ant(start, ant, nbant);
+	result = solve(list, start, end, nbant);
 	ft_lstiter(list, reconnect);
-	score = score_it(result, nbant);
-	ft_printf("score = %zd\n", score);
 	ft_lstiter(list, print_room);
 	ft_lstiter(result, print_path);
 	// lem_in(result, nbant);
+	ft_lstdel(&result, NULL);
 	ft_lstdel(&list, free_room);
 }
