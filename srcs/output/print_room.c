@@ -14,9 +14,9 @@
 #include "ft_printf.h"
 #include "lst.h"
 
-void	print_room(t_list *elem)
+void	print_room(t_dlist *elem)
 {
-	t_list *list;
+	t_dlist *list;
 
 	ft_printf("%s - %u:\n", ((t_room *)elem->content)->name, ROOM(elem)->cost);
 	list = ((t_room *)elem->content)->neighbours;

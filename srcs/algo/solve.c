@@ -14,10 +14,10 @@
 
 /*compare 2 path et return la room qu'ils ont en commun */
 
-t_room	*path_cmp(t_list *l1, t_list *l2)
+t_room	*path_cmp(t_dlist *l1, t_dlist *l2)
 {
-	t_list	*p1;
-	t_list	*p2;
+	t_dlist	*p1;
+	t_dlist	*p2;
 
 	if (!l1 || !l2 || !LIST(l1) || !LIST(l2))
 		return (NULL);
@@ -38,10 +38,10 @@ t_room	*path_cmp(t_list *l1, t_list *l2)
 
 /* find_route return tout les groupes possible qu'il peut constituer avec l'ensemble des path qu'on lui donne en parametre */
 
-t_list	*find_route(t_list *result, int maxpath)
+t_dlist	*find_route(t_dlist *result, int maxpath)
 {
-	t_list	*tmp;
-	t_list	*route;
+	t_dlist	*tmp;
+	t_dlist	*route;
 
 	if (!result)
 		return (NULL);
@@ -54,33 +54,33 @@ t_list	*find_route(t_list *result, int maxpath)
 	return (NULL);
 }
 
-t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
+t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal)
 {
-	t_list	*tmp;
-	t_list	*result;
+	t_dlist	*tmp;
+	t_dlist	*result;
 
 	tmp = begin->neighbours;
 	result = NULL;
 	while (tmp)
 	{
-		ft_lstadd(&result,
-				ft_lstlink(path_finding(list, ROOM(tmp), goal), sizeof(t_room)));
+		ft_dlstprepend(&result,
+				ft_dlstlink(path_finding(list, ROOM(tmp), goal), sizeof(t_room)));
 		tmp = tmp->next;
 	}
 	return (result);
 }
 
-t_list	*solve(t_list *list, t_room *start, t_room *end)
+t_dlist	*solve(t_dlist *list, t_room *start, t_room *end)
 {
 	t_room	*cmp;
-	t_list	*result;
+	t_dlist	*result;
 	size_t	maxpath;
 	t_room	*begin;
 
 	result = NULL;
-	begin = (ft_lstlen(start->neighbours) <= ft_lstlen(end->neighbours)) ?
+	begin = (ft_dlstlen(start->neighbours) <= ft_dlstlen(end->neighbours)) ?
 		start : end;
-	maxpath = ft_lstlen(begin->neighbours);
+	maxpath = ft_dlstlen(begin->neighbours);
 	disconnect(begin);
 	result = get_path(list, begin, (begin == start) ? end : start);
 	cmp = path_cmp(result, result->next);

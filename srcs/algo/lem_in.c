@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	lem_in(t_list **result, unsigned int nbant)
+void	lem_in(t_dlist **result, unsigned int nbant)
 {
 	t_room *antloc[nbant];
 

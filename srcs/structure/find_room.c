@@ -14,7 +14,7 @@
 #include "lst.h"
 #include "ft_string.h"
 
-t_room	*find_room(t_list *head, char *name)
+t_room	*find_room(t_dlist *head, char *name)
 {
 	while (head)
 	{

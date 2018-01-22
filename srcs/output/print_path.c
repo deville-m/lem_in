@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	print_path(t_list *elem)
+void	print_path(t_dlist *elem)
 {
-	ft_lstiter(elem->content, print_elem);
+	ft_dlstiter(elem->content, print_elem);
 }

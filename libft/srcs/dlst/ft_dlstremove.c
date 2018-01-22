@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reconnect.c                                        :+:      :+:    :+:   */
+/*   ft_dlstremove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 21:53:53 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 22:04:01 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/19 18:14:12 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/22 15:58:37 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "dlst.h"
 
-void	reconnect(t_dlist *elem)
+t_dlist	*ft_dlstremove(
+				t_dlist **list,
+				void *dataref,
+				int (*cmp)(const void *, const void *))
 {
-	t_dlist	*tmp;
+	t_dlist *tmp;
 
-	if (!elem)
-		return ;
-	tmp = ROOM(elem)->removed;
-	if (!tmp)
-		return ;
-	while (tmp->next)
+	if (!list || !cmp || !dataref)
+		return (NULL);
+	tmp = *list;
+	while (tmp)
+	{
+		if (!cmp(tmp->content, dataref))
+		{
+			if (tmp->prev)
+				tmp->prev->next = tmp->next;
+			else
+				*list = tmp->next;
+			tmp->next = NULL;
+			return (tmp);
+		}
 		tmp = tmp->next;
-	tmp->next = ROOM(elem)->neighbours;
-	ROOM(elem)->neighbours = ROOM(elem)->removed;
-	ROOM(elem)->removed = NULL;
+	}
+	return (NULL);
 }

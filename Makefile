@@ -22,6 +22,7 @@ SRC =	main.c \
 		structure/room_cmp.c \
 		algo/dijkstra.c \
 		algo/path_finding.c \
+		algo/generate.c \
 		algo/solve.c \
 		algo/score.c
 

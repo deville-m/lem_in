@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	print_elem(t_list *elem)
+void	print_elem(t_dlist *elem)
 {
 	if (!elem || !elem->content)
 		return ;

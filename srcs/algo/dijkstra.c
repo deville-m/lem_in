@@ -13,14 +13,14 @@
 #include <limits.h>
 #include "lem_in.h"
 
-static void	set_cost(t_list *elem)
+static void	set_cost(t_dlist *elem)
 {
 	ROOM(elem)->cost = UINT_MAX;
 }
 
 static void	recursion(t_room *curr)
 {
-	t_list *walk;
+	t_dlist *walk;
 
 	walk = curr->neighbours;
 	while (walk)
@@ -34,11 +34,11 @@ static void	recursion(t_room *curr)
 	}
 }
 
-void		dijkstra(t_list *nodes, t_room *start)
+void		dijkstra(t_dlist *nodes, t_room *start)
 {
 	if (!start)
 		return ;
-	ft_lstiter(nodes, set_cost);
+	ft_dlstiter(nodes, set_cost);
 	start->cost = 0;
 	recursion(start);
 }

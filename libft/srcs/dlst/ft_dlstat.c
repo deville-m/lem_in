@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reconnect.c                                        :+:      :+:    :+:   */
+/*   ft_dlstat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 21:53:53 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 22:04:01 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/22 16:48:47 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/22 16:50:04 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "dlst.h"
 
-void	reconnect(t_dlist *elem)
+t_dlist	*ft_dlstat(t_dlist *head, size_t index)
 {
-	t_dlist	*tmp;
+	size_t i;
 
-	if (!elem)
-		return ;
-	tmp = ROOM(elem)->removed;
-	if (!tmp)
-		return ;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = ROOM(elem)->neighbours;
-	ROOM(elem)->neighbours = ROOM(elem)->removed;
-	ROOM(elem)->removed = NULL;
+	i = 0;
+	while (head && i < index)
+	{
+		head = head->next;
+		i++;
+	}
+	return (head);
 }

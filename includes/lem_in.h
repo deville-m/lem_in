@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 17:03:52 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/22 18:24:44 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include "ft_string.h"
-# include "lst.h"
+# include "dlst.h"
 # include "get_next_line.h"
 # include "conversion.h"
 # include "ft_printf.h"
@@ -26,26 +26,26 @@ typedef struct			s_room
 	char				*name;
 	unsigned int		x;
 	unsigned int		y;
-	t_list				*neighbours;
-	t_list				*removed;
+	t_dlist				*neighbours;
+	t_dlist				*removed;
 }						t_room;
 
 # define	ROOM(x) ((t_room *)x->content)
-# define	LIST(x) ((t_list *)x->content)
+# define	LIST(x) ((t_dlist *)x->content)
 
 /*
 ** Graph related functions
 */
 
-t_room					*find_room(t_list *head, char *name);
+t_room					*find_room(t_dlist *head, char *name);
 
 int						is_connected(t_room *start, t_room *end);
 void					disconnect(t_room *room);
-void					reconnect(t_list *elem);
+void					reconnect(t_dlist *elem);
 
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
-t_room					*find_double(t_list *p1, t_list *p2);
+t_room					*find_double(t_dlist *p1, t_dlist *p2);
 
 /*
 ** Parsing related functions
@@ -54,41 +54,42 @@ t_room					*find_double(t_list *p1, t_list *p2);
 int						is_comment(const char *line);
 int						is_command(const char *line);
 int						is_room(const char *line);
-int						is_valid_connexion(t_list *list, char *line);
+int						is_valid_connexion(t_dlist *list, char *line);
 
-t_list					*parse(t_room **start, t_room **end);
+t_dlist					*parse(t_room **start, t_room **end);
 
 /*
 ** Solving related functions
 */
 
-t_list					*solve(
-							t_list *list,
+t_dlist					*solve(
+							t_dlist *list,
 							t_room *start,
 							t_room *end);
 
 void					lem_in(
-							t_list **result,
+							t_dlist **result,
 							unsigned int nbant);
 
 /*
 ** Output functions
 */
 
-void					print_path(t_list *elem);
-void					print_room(t_list *room);
-void					print_elem(t_list *elem);
+void					print_path(t_dlist *elem);
+void					print_room(t_dlist *room);
+void					print_elem(t_dlist *elem);
 
 
 /*
 ** Algo
 */
 
-void					dijkstra(t_list *nodes, t_room *start);
-t_list					*path_finding(
-									t_list *nodes,
+void					dijkstra(t_dlist *nodes, t_room *start);
+t_dlist					*path_finding(
+									t_dlist *nodes,
 									t_room *start,
 									t_room *end);
-size_t						score_it(t_list *route, unsigned int nbant);
+size_t						score_it(t_dlist *route, unsigned int nbant);
+void						generate(size_t i, t_dlist *list);
 
 #endif

@@ -13,13 +13,13 @@
 #include "lem_in.h"
 #include "lst.h"
 
-static int	recursion(t_list **lst, t_room *curr, t_room *goal)
+static int	recursion(t_dlist **lst, t_room *curr, t_room *goal)
 {
-	t_list	*walk;
+	t_dlist	*walk;
 
 	if (curr == goal)
 		return (1);
-	ft_lstadd(lst, ft_lstlink(curr, sizeof(curr)));
+	ft_dlstprepend(lst, ft_dlstlink(curr, sizeof(curr)));
 	walk = curr->neighbours;
 	while (walk)
 	{
@@ -35,11 +35,11 @@ static int	recursion(t_list **lst, t_room *curr, t_room *goal)
 
 int			is_connected(t_room *start, t_room *end)
 {
-	t_list	*history;
+	t_dlist	*history;
 	int		ret;
 
 	history = NULL;
 	ret = recursion(&history, start, end);
-	ft_lstdel(&history, NULL);
+	ft_dlstdel(&history, NULL);
 	return (ret);
 }

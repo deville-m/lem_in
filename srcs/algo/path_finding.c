@@ -12,9 +12,9 @@
 
 #include "lem_in.h"
 
-static inline t_list	*get_next(t_room *end)
+static inline t_dlist	*get_next(t_room *end)
 {
-	t_list *tmp;
+	t_dlist *tmp;
 
 	tmp = end->neighbours;
 	while (tmp && ROOM(tmp)->cost != end->cost - 1)
@@ -22,11 +22,11 @@ static inline t_list	*get_next(t_room *end)
 	return (tmp);
 }
 
-t_list					*path_finding(t_list *list, t_room *start, t_room *end)
+t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 {
 	t_room	*goal;
-	t_list	*res;
-	t_list	*tmp;
+	t_dlist	*res;
+	t_dlist	*tmp;
 
 	if (!list || !start || !end)
 		return (NULL);
@@ -38,14 +38,14 @@ t_list					*path_finding(t_list *list, t_room *start, t_room *end)
 		tmp = get_next(end);
 		if (!tmp)
 		{
-			ft_lstdel(&res, NULL);
+			ft_dlstdel(&res, NULL);
 			break ;
 		}
 		if (end != goal)
-			ft_lstadd(&res, ft_lstlink(end, sizeof(end)));
+			ft_dlstprepend(&res, ft_dlstlink(end, sizeof(end)));
 		end = ROOM(tmp);
 	}
 	if (end == start)
-		ft_lstadd(&res, ft_lstlink(end, sizeof(end)));
+		ft_dlstprepend(&res, ft_dlstlink(end, sizeof(end)));
 	return (res);
 }

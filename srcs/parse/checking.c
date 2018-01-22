@@ -54,7 +54,7 @@ int		is_room(const char *line)
 	return (!*line);
 }
 
-int		is_valid_connexion(t_list *list, char *line)
+int		is_valid_connexion(t_dlist *list, char *line)
 {
 	char	*tmp[2];
 

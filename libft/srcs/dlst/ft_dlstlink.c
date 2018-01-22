@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reconnect.c                                        :+:      :+:    :+:   */
+/*   ft_dlstlink.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 21:53:53 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 22:04:01 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/18 19:09:20 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/22 15:55:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include <stdlib.h>
+#include "dlst.h"
 
-void	reconnect(t_dlist *elem)
+t_dlist	*ft_dlstlink(void *content, size_t content_size)
 {
-	t_dlist	*tmp;
+	t_dlist *list;
 
-	if (!elem)
-		return ;
-	tmp = ROOM(elem)->removed;
-	if (!tmp)
-		return ;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = ROOM(elem)->neighbours;
-	ROOM(elem)->neighbours = ROOM(elem)->removed;
-	ROOM(elem)->removed = NULL;
+	if (!(list = (t_dlist *)malloc(sizeof(t_dlist))))
+		return (NULL);
+	list->next = NULL;
+	list->prev = NULL;
+	list->content_size = (content) ? content_size : 0;
+	list->content = content;
+	return (list);
 }

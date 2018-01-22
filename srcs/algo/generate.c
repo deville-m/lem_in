@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reconnect.c                                        :+:      :+:    :+:   */
+/*   generate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 21:53:53 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 22:04:01 by mdeville         ###   ########.fr       */
+/*   Created: 2018/01/22 14:58:24 by mdeville          #+#    #+#             */
+/*   Updated: 2018/01/22 18:28:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	reconnect(t_dlist *elem)
+void	generate(size_t n, t_dlist *list)
 {
-	t_dlist	*tmp;
+	size_t i;
 
-	if (!elem)
-		return ;
-	tmp = ROOM(elem)->removed;
-	if (!tmp)
-		return ;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = ROOM(elem)->neighbours;
-	ROOM(elem)->neighbours = ROOM(elem)->removed;
-	ROOM(elem)->removed = NULL;
+	if (n == 1)
+		ft_dlstiter(list, print_elem);
+	else
+	{
+		i = 0;
+		while (i < n - 1)
+		{
+			generate(n - 1, list);
+			if (n % 2 == 0)
+				ft_dlstswap(ft_dlstat(list, i), ft_dlstat(list, n - 1));
+			else
+				ft_dlstswap(ft_dlstat(list, 0), ft_dlstat(list, n - 1));
+			i += 1;
+		}
+		generate(n - 1, list);
+	}
 }

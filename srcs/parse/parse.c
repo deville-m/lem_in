@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "lem_in.h"
 
-static void			parse_room(t_list **list, char *line)
+static void			parse_room(t_dlist **list, char *line)
 {
 	char	*to_free;
 	t_room	res;
@@ -34,12 +34,12 @@ static void			parse_room(t_list **list, char *line)
 	res.y = ft_atou(line);
 	res.neighbours = NULL;
 	res.removed = NULL;
-	ft_lstadd(list, ft_lstnew(&res, sizeof(res)));
+	ft_dlstprepend(list, ft_dlstnew(&res, sizeof(res)));
 	free(to_free);
 }
 
 static void			parse_command(
-							t_list **list,
+							t_dlist **list,
 							char *line,
 							t_room **start,
 							t_room **end)
@@ -63,7 +63,7 @@ static void			parse_command(
 	}
 }
 
-static void			parse_connexion(t_list *list, char *line)
+static void			parse_connexion(t_dlist *list, char *line)
 {
 	t_room	*tmp1;
 	t_room	*tmp2;
@@ -76,12 +76,12 @@ static void			parse_connexion(t_list *list, char *line)
 	tmp1 = find_room(list, first);
 	tmp2 = find_room(list, line);
 	ft_printf("%s-%s\n", first, line);
-	ft_lstadd(&tmp1->neighbours, ft_lstlink(tmp2, sizeof(t_room)));
-	ft_lstadd(&tmp2->neighbours, ft_lstlink(tmp1, sizeof(t_room)));
+	ft_dlstprepend(&tmp1->neighbours, ft_dlstlink(tmp2, sizeof(t_room)));
+	ft_dlstprepend(&tmp2->neighbours, ft_dlstlink(tmp1, sizeof(t_room)));
 	free(first);
 }
 
-static inline int	first_line(t_list *list, char *line)
+static inline int	first_line(t_dlist *list, char *line)
 {
 	static int norm = 0;
 
@@ -100,9 +100,9 @@ static inline int	first_line(t_list *list, char *line)
 	return (norm);
 }
 
-t_list				*parse(t_room **start, t_room **end)
+t_dlist				*parse(t_room **start, t_room **end)
 {
-	t_list	*list;
+	t_dlist	*list;
 	int		ret;
 	char	*line;
 

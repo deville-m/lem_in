@@ -28,14 +28,21 @@ SRC = srcs/conversion/ft_atoi.c \
 	srcs/ctype/ft_tolower.c \
 	srcs/ctype/ft_toupper.c \
 	srcs/dlst/ft_dlstappend.c \
+	srcs/dlst/ft_dlstat.c \
 	srcs/dlst/ft_dlstdel.c \
 	srcs/dlst/ft_dlstdel_back.c \
 	srcs/dlst/ft_dlstdel_front.c \
 	srcs/dlst/ft_dlstdelone.c \
 	srcs/dlst/ft_dlstfilter.c \
+	srcs/dlst/ft_dlstiter.c \
+	srcs/dlst/ft_dlstlen.c \
+	srcs/dlst/ft_dlstpop.c \
+	srcs/dlst/ft_dlstlink.c \
+	srcs/dlst/ft_dlstremove.c \
 	srcs/dlst/ft_dlstnew.c \
 	srcs/dlst/ft_dlstprepend.c \
 	srcs/dlst/ft_dlstreverse.c \
+	srcs/dlst/ft_dlstswap.c \
 	srcs/ft_getopt/ft_getopt.c \
 	srcs/ft_io/ft_putchar.c \
 	srcs/ft_io/ft_putchar_fd.c \
