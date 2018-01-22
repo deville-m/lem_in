@@ -23,7 +23,8 @@ SRC =	main.c \
 		algo/dijkstra.c \
 		algo/path_finding.c \
 		algo/solve.c \
-		algo/score.c
+		algo/score.c \
+		algo/deter.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)

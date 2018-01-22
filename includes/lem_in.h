@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 21:43:39 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/22 21:23:49 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void					reconnect(t_list *elem);
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
 t_room					*find_double(t_list *p1, t_list *p2);
+void					init_deter(t_room *begin, t_room *except);
+void					deter(t_list *path);
 
 /*
 ** Parsing related functions

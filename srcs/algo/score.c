@@ -12,9 +12,9 @@ size_t	try_score(t_list *find, t_list *route, unsigned int nbant)
 	return (score);
 }
 
-
 size_t	score_it(t_list *route, unsigned int nbant)
 {
+	size_t	plus;
 	size_t	maxlen;
 	t_list	*max;
 	t_list	*list;
@@ -37,5 +37,6 @@ size_t	score_it(t_list *route, unsigned int nbant)
 			nbant = 0;
 		list = list->next;
 	}
+	plus = (nbant % ft_lstlen(route)) ? 1 : 0;
 	return (maxlen + nbant / ft_lstlen(route));
 }

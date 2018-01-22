@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/20 15:08:21 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/22 21:21:23 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_list	*path_finding(t_list *list, t_room *start, t_room *end)
 {
+	t_room	*max;
 	t_room	*goal;
 	t_list	*res;
 	t_list	*tmp;
@@ -22,22 +23,24 @@ t_list	*path_finding(t_list *list, t_room *start, t_room *end)
 		return (NULL);
 	res = NULL;
 	goal = end;
-	dijkstra(list, start);
 	while (end != start)
 	{
+		max = NULL;
 		tmp = end->neighbours;
-		while (tmp && ROOM(tmp)->cost != end->cost - 1)
+		while (tmp)
 		{
+			if ((!max || max->cost < ROOM(tmp)->cost) && ROOM(tmp)->cost < end->cost)
+				max = ROOM(tmp);
 			tmp = tmp->next;
 		}
-		if (!tmp)
+		if (!max)
 		{
 			ft_lstdel(&res, NULL);
 			break ;
 		}
 		if (end != goal)
 			ft_lstadd(&res, ft_lstlink(end, sizeof(end)));
-		end = ROOM(tmp);
+		end = max;
 	}
 	if (end == start)
 		ft_lstadd(&res, ft_lstlink(end, sizeof(end)));

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 22:17:49 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/22 21:32:13 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,6 @@ t_room	*path_cmp(t_list *l1, t_list *l2)
 	return (NULL);
 }
 
-// t_list	*get_path(t_list *list, t_room *begin, t_room *goal)
-// {
-// 	t_list	*tmp;
-// 	t_list	*result;
-//
-// 	tmp = begin->neighbours;
-// 	result = NULL;
-// 	while (tmp)
-// 	{
-// 		ft_lstadd(&result,
-// 				ft_lstlink(path_finding(list, ROOM(tmp), goal), sizeof(t_room)));
-// 		tmp = tmp->next;
-// 	}
-// 	return (result);
-// }
-
 t_list	*get_path(t_list *list, t_room *begin, t_room *goal, unsigned nbant)
 {
 	size_t	score;
@@ -76,10 +60,12 @@ t_list	*get_path(t_list *list, t_room *begin, t_room *goal, unsigned nbant)
 	while (try)
 	{
 		result = NULL;
-		tmp = try;
+		tmp = begin->neighbours;
 		score = INT_MAX;
 		while (tmp)
 		{
+			dijkstra(list, ROOM(tmp));
+			// init_deter(begin, ROOM(tmp));
 			if ((find = path_finding(list, ROOM(tmp), goal)))
 			{
 				if (result)
