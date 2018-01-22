@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 16:51:17 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 18:47:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:50:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void				ft_dlstswap(t_dlist *e1, t_dlist *e2)
 		ba(e1, e2);
 	else
 	{
+		tmp = e1->next;
+		e1->next = e2->next;
+		e2->next = tmp;
+		tmp = e1->prev;
+		e1->prev = e2->prev;
+		e2->prev = tmp;
 		if (e2->prev)
 			e2->prev->next = e1;
 		if (e2->next)
@@ -56,11 +62,5 @@ void				ft_dlstswap(t_dlist *e1, t_dlist *e2)
 			e1->prev->next = e2;
 		if (e1->next)
 			e1->next->prev = e2;
-		tmp = e1->next;
-		e1->next = e2->next;
-		e2->next = tmp;
-		tmp = e1->prev;
-		e1->prev = e2->prev;
-		e2->prev = tmp;
 	}
 }

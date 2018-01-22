@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:15:45 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 17:01:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:52:30 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				ft_dlstfilter(
 								t_dlist **alst,
 								int (*p)(t_dlist *),
 								void (*del)(void *, size_t));
-t_dlist				*ft_dlstnew(char const *content, size_t content_size);
+t_dlist				*ft_dlstnew(void const *content, size_t content_size);
 void				ft_dlstprepend(t_dlist **alst, t_dlist *new);
 void				ft_dlstreverse(t_dlist **alst);
 t_dlist				*ft_dlstremove(
