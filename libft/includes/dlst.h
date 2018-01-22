@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:15:45 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 18:52:30 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:10:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ t_dlist				*ft_dlstremove(
 								int (*cmp)(const void *, const void *));
 t_dlist				*ft_dlstpop(t_dlist **alst);
 size_t				ft_dlstlen(t_dlist *list);
-void				ft_dlstswap(t_dlist *e1, t_dlist *e2);
+void				**ft_dlst_to_tab(t_dlist *list);
 
 #endif

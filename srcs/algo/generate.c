@@ -6,30 +6,49 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:58:24 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 18:28:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:08:10 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	generate(size_t n, t_dlist *list)
+static void	print_tab(t_room **tab)
+{
+	size_t i;
+
+	i = 0;
+	while (tab[i])
+		ft_printf("%s ", tab[i++]->name);
+	ft_printf("\n");
+}
+
+static void		swap(t_room **e1, t_room **e2)
+{
+	t_room *tmp;
+
+	tmp = *e1;
+	*e1 = *e2;
+	*e2 = tmp;
+}
+
+void	generate(size_t n, t_room *tab[])
 {
 	size_t i;
 
 	if (n == 1)
-		ft_dlstiter(list, print_elem);
+		print_tab(tab);
 	else
 	{
 		i = 0;
 		while (i < n - 1)
 		{
-			generate(n - 1, list);
+			generate(n - 1, tab);
 			if (n % 2 == 0)
-				ft_dlstswap(ft_dlstat(list, i), ft_dlstat(list, n - 1));
+				swap(&tab[i], &tab[n - 1]);
 			else
-				ft_dlstswap(ft_dlstat(list, 0), ft_dlstat(list, n - 1));
+				swap(&tab[0], &tab[n - 1]);
 			i += 1;
 		}
-		generate(n - 1, list);
+		generate(n - 1, tab);
 	}
 }

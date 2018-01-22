@@ -42,7 +42,7 @@ SRC = srcs/conversion/ft_atoi.c \
 	srcs/dlst/ft_dlstnew.c \
 	srcs/dlst/ft_dlstprepend.c \
 	srcs/dlst/ft_dlstreverse.c \
-	srcs/dlst/ft_dlstswap.c \
+	srcs/dlst/ft_dlst_to_tab.c \
 	srcs/ft_getopt/ft_getopt.c \
 	srcs/ft_io/ft_putchar.c \
 	srcs/ft_io/ft_putchar_fd.c \

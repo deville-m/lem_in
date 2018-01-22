@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 18:24:44 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/22 20:49:42 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ t_dlist					*path_finding(
 									t_room *start,
 									t_room *end);
 size_t						score_it(t_dlist *route, unsigned int nbant);
-void						generate(size_t i, t_dlist *list);
+void						generate(size_t i, t_room *tab[]);
 
 #endif
