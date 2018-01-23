@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 21:05:24 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/23 21:13:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ static int	get_nbant(unsigned int *nbant)
 
 int			main(void)
 {
-	size_t			i;
 	t_dlist			*result;
 	t_dlist			*list;
 	t_room			*start;
 	t_room			*end;
-	t_room			**room;
 	unsigned int	nbant;
 
 	if (!get_nbant(&nbant))
@@ -53,16 +51,9 @@ int			main(void)
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
-	room = (t_room **)ft_dlst_to_tab(list);
-	i = 0;
-	ft_printf("length: %zu\n", ft_dlstlen(list));
-	while (room[i])
-	{
-		ft_printf("%s ", room[i++]->name);
-	}
-	generate(ft_dlstlen(list), room);
-	//result = solve(list, start, end);
-	//generate(ft_dlstlen(start->neighbours), (t_room **)ft_dlst_to_tab(start->neighbours));
+	//ft_dlstiter(list, print_room);
+	result = solve(list, start, end);
+	ft_dlstiter(result, print_path);
 	// lem_in(result, nbant);
 	ft_dlstdel(&list, free_room);
 }
