@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 21:51:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:06:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ static inline int	first_line(t_dlist *list, char *line)
 
 	if (norm)
 		return (norm);
-	if (is_comment(line))
-	{
-		free(line);
-		norm = 1;
-	}
 	else if (is_valid_connexion(list, line))
 	{
 		parse_connexion(list, line);
@@ -115,7 +110,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 		else if (is_command(line))
 			parse_command(&list, line, start, end);
 		else
-			free(line);
+			comment(line);
 	}
 	while (first_line(list, line) && get_next_line(0, &line) == 1
 			&& ((ret = is_valid_connexion(list, line)) || is_comment(line)))
@@ -123,7 +118,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 		if (ret)
 			parse_connexion(list, line);
 		else
-			free(line);
+			comment(line);
 	}
 	free(line);
 	return (list);

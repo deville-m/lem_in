@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 10:03:16 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/20 12:31:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:05:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,10 @@ int		is_valid_connexion(t_dlist *list, char *line)
 	}
 	tmp[1] = line;
 	return (0);
+}
+
+void	comment(char *line)
+{
+	ft_printf("%s\n", line);
+	free(line);
 }

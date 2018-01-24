@@ -6,7 +6,11 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 22:02:30 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/24 22:06:43 by vlay             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+>>>>>>> 19225520f9d3f1258bd478241aad52f213d29412
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,10 @@ static int	get_nbant(unsigned int *nbant)
 
 	tmp = NULL;
 	while (get_next_line(0, &tmp) == 1 && is_comment(tmp))
+	{
+		ft_printf("%s\n", tmp);
 		free(tmp);
+	}
 	if (!tmp
 		|| !ft_str_is_numeric(tmp)
 		|| !(*nbant = ft_atoi(tmp)))
@@ -49,6 +56,7 @@ int			main(void)
 	list = parse(&start, &end);
 	if (!list || !start || !end || !is_connected(start, end))
 	{
+		ft_dlstdel(&list, free_room);
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
