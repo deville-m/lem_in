@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/23 21:13:48 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:59:02 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static int	get_nbant(unsigned int *nbant)
 
 	tmp = NULL;
 	while (get_next_line(0, &tmp) == 1 && is_comment(tmp))
+	{
+		ft_printf("%s\n", tmp);
 		free(tmp);
+	}
 	if (!tmp
 		|| !ft_str_is_numeric(tmp)
 		|| !(*nbant = ft_atoi(tmp)))
@@ -35,7 +38,6 @@ static int	get_nbant(unsigned int *nbant)
 
 int			main(void)
 {
-	t_dlist			*result;
 	t_dlist			*list;
 	t_room			*start;
 	t_room			*end;
@@ -48,12 +50,13 @@ int			main(void)
 	list = parse(&start, &end);
 	if (!list || !start || !end || !is_connected(start, end))
 	{
+		ft_dlstdel(&list, free_room);
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
-	//ft_dlstiter(list, print_room);
-	result = solve(list, start, end);
-	ft_dlstiter(result, print_path);
+	ft_dlstiter(list, print_room);
+//	result = solve(list, start, end);
+//	ft_dlstiter(result, print_path);
 	// lem_in(result, nbant);
 	ft_dlstdel(&list, free_room);
 }

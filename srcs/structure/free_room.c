@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 14:28:22 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 00:17:53 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:47:59 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 
 void	free_room(void *room, size_t size)
 {
-	t_dlist *tmp;
-
 	if (!room)
 		return ;
 	(void)size;
-	tmp = ((t_room *)room)->neighbours;
 	free(((t_room *)room)->name);
-	ft_dlstdel(&tmp, NULL);
+	ft_dlstdel(&((t_room *)room)->neighbours, NULL);
 	free(room);
 }

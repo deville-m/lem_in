@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 20:49:42 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:05:35 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int						is_command(const char *line);
 int						is_room(const char *line);
 int						is_valid_connexion(t_dlist *list, char *line);
 
+void					comment(char *line);
 t_dlist					*parse(t_room **start, t_room **end);
 
 /*
