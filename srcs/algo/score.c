@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:30:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 14:30:58 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 19:04:29 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 size_t	score_it(t_dlist *route, unsigned int nbant)
 {
+	size_t	plus;
 	size_t	maxlen;
 	t_dlist	*max;
 	t_dlist	*list;
@@ -36,5 +37,6 @@ size_t	score_it(t_dlist *route, unsigned int nbant)
 			nbant = 0;
 		list = list->next;
 	}
-	return (maxlen + nbant / ft_dlstlen(route) + nbant % ft_dlstlen(route));
+	plus = (nbant % ft_dlstlen(route)) ? 1 : 0;
+	return (maxlen + nbant / ft_dlstlen(route) + plus);
 }
