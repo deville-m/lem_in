@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2018/01/23 17:42:50 by mdeville         ###   ########.fr        #
+#    Updated: 2018/01/24 21:28:30 by vlay             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,18 @@ ARFLAGS         =-rcs
 
 # list all sources
 CONVERSION_SRC  =	ft_atoi.c ft_atou.c ft_atoimax.c ft_itoa.c ft_utoa.c \
-					ft_utoa_base.c 
+					ft_utoa_base.c
 
 CTYPE_SRC       =	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isatty.c \
 					ft_isblank.c ft_iscntrl.c ft_isdigit.c ft_isgraph.c \
 					ft_islower.c ft_isnumber.c ft_isprint.c ft_isspace.c \
-					ft_isupper.c ft_isxdigit.c ft_tolower.c ft_toupper.c 
+					ft_isupper.c ft_isxdigit.c ft_tolower.c ft_toupper.c
 
 DLST_SRC        =	ft_dlstappend.c ft_dlstdel.c ft_dlstdel_back.c \
 					ft_dlstdel_front.c ft_dlstdelone.c ft_dlstfilter.c \
 					ft_dlstlen.c ft_dlstpop.c ft_dlstlink.c ft_dlstremove.c \
 					ft_dlstnew.c ft_dlstprepend.c ft_dlstreverse.c ft_dlstat.c \
-					ft_dlstiter.c ft_dlst_to_tab.c
+					ft_dlstiter.c ft_dlst_to_tab.c ft_dlstiter.c
 
 FT_GETOPT_SRC   =	ft_getopt.c
 

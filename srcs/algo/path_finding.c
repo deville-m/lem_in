@@ -6,20 +6,62 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/21 19:36:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 22:05:19 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static inline t_dlist	*get_next(t_room *end)
+t_dlist	*dpath_cmp(t_dlist *l1, t_dlist *l2)
+{
+	while (l1)
+	{
+		if (ROOM(l1) == ROOM(l2))
+			return (l1);
+		l1 = l1->next;
+	}
+	return (NULL);
+}
+
+// static inline t_dlist	*get_next(t_room *end, t_dlist *res)
+// {
+// 	t_dlist	*min;
+// 	t_dlist *tmp;
+//
+// 	tmp = end->neighbours;
+// 	if (dpath_cmp(res, tmp))
+// 		tmp = tmp->next;
+// 	min = tmp;
+// 	while (tmp)
+// 	{
+// 		if (!dpath_cmp(res, tmp)
+// 			&& (ROOM(tmp)->cost < ROOM(min)->cost
+// 			|| (ROOM(tmp)->cost == ROOM(min)->cost
+// 			&& ft_dlstlen(ROOM(tmp)->neighbours) < ft_dlstlen(ROOM(min)->neighbours))))
+// 			min = tmp;
+// 		tmp = tmp->next;
+// 	}
+// 	return (min);
+// }
+
+static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 {
 	t_dlist *tmp;
+	t_dlist *min;
 
-	tmp = end->neighbours;
-	while (tmp && ROOM(tmp)->cost != end->cost - 1)
+	min = room->neighbours;
+	while (min && find_room(past, ROOM(min)->name))
+		min = min->next;
+	tmp = (min) ? min->next : NULL;
+	while (tmp)
+	{
+		if (ROOM(tmp) == end)
+			return (tmp);
+		if (ROOM(tmp)->cost < ROOM(min)->cost && !find_room(past, ROOM(min)->name))
+			min = tmp;
 		tmp = tmp->next;
-	return (tmp);
+	}
+	return (min);
 }
 
 t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
@@ -32,20 +74,19 @@ t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 		return (NULL);
 	res = NULL;
 	goal = end;
-	dijkstra(list, start);
+	disconnect(end);
 	while (end != start)
 	{
-		tmp = get_next(end);
+		ft_printf("end = %s\n", end->name);
+		tmp = get_next(end, res, end);
 		if (!tmp)
 		{
 			ft_dlstdel(&res, NULL);
 			break ;
 		}
-		if (end != goal)
-			ft_dlstprepend(&res, ft_dlstlink(end, sizeof(end)));
+		// if (end != goal)
+		ft_dlstprepend(&res, ft_dlstlink(ROOM(tmp), sizeof(end)));
 		end = ROOM(tmp);
 	}
-	if (end == start)
-		ft_dlstprepend(&res, ft_dlstlink(end, sizeof(end)));
 	return (res);
 }

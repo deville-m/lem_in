@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/23 21:13:48 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 22:02:30 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	get_nbant(unsigned int *nbant)
 
 int			main(void)
 {
+	t_dlist			*path;
 	t_dlist			*result;
 	t_dlist			*list;
 	t_room			*start;
@@ -52,8 +53,14 @@ int			main(void)
 		return (1);
 	}
 	//ft_dlstiter(list, print_room);
-	result = solve(list, start, end);
-	ft_dlstiter(result, print_path);
+	prepare(list, start, end);
+	path = NULL;
+	result = path_finding(list, find_room(list, "1"), end);
+	ft_dlstprepend(&path, ft_dlstlink(result, sizeof(t_dlist)));
+	// result = solve(list, start, end, nbant);
+	ft_printf("result = %p\n", result);
+	// ft_dlstiter(result, print_room);
+	ft_dlstiter(path, print_path);
 	// lem_in(result, nbant);
-	ft_dlstdel(&list, free_room);
+	// ft_dlstdel(&list, free_room);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 20:49:42 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 21:30:12 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void					reconnect(t_dlist *elem);
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
 t_room					*find_double(t_dlist *p1, t_dlist *p2);
+void						prepare(t_dlist *list, t_room *begin, t_room *goal);
 
 /*
 ** Parsing related functions
@@ -62,10 +63,7 @@ t_dlist					*parse(t_room **start, t_room **end);
 ** Solving related functions
 */
 
-t_dlist					*solve(
-							t_dlist *list,
-							t_room *start,
-							t_room *end);
+t_dlist				*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant);
 
 void					lem_in(
 							t_dlist **result,
@@ -91,5 +89,6 @@ t_dlist					*path_finding(
 									t_room *end);
 size_t						score_it(t_dlist *route, unsigned int nbant);
 void						generate(size_t i, t_room *tab[]);
+t_room					*path_cmp(t_dlist *l1, t_dlist *l2);
 
 #endif

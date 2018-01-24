@@ -6,11 +6,12 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:30:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 19:04:29 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/24 20:59:44 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <limits.h>
 
 size_t	score_it(t_dlist *route, unsigned int nbant)
 {
@@ -20,7 +21,8 @@ size_t	score_it(t_dlist *route, unsigned int nbant)
 	t_dlist	*list;
 
 	max = NULL;
-	list = route;
+	if (!(list = route))
+		return (UINT_MAX);
 	while (list)
 	{
 		if (!max || ft_dlstlen(LIST(list)) > ft_dlstlen(max))
