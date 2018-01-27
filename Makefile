@@ -32,7 +32,7 @@ OBJ := $(SRC:.c=.o)
 all: $(NAME)
 
 $(LIBDIR)/$(LIB):
-	@$(MAKE) -C $(LIBDIR)
+	@$(MAKE) -j8 -C $(LIBDIR)
 
 %.o: %.c
 	@zsh -c "echo -n '\tCompiling $<'"
