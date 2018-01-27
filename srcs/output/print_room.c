@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 00:20:18 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/19 17:47:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/01/27 21:03:18 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_room(t_dlist *elem)
 {
 	t_dlist *list;
 
-	ft_printf("%s - %u:\n", ((t_room *)elem->content)->name, ROOM(elem)->cost);
+	ft_printf("%s - %u | %u:\n", ((t_room *)elem->content)->name, ROOM(elem)->cost, ROOM(elem)->occupied);
 	list = ((t_room *)elem->content)->neighbours;
 	while (list)
 	{

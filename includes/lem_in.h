@@ -6,11 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/01/24 21:30:12 by vlay             ###   ########.fr       */
-=======
-/*   Updated: 2018/01/24 21:05:35 by mdeville         ###   ########.fr       */
->>>>>>> 19225520f9d3f1258bd478241aad52f213d29412
+/*   Updated: 2018/01/27 19:47:39 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +23,7 @@
 typedef struct			s_room
 {
 	unsigned int		cost;
+	unsigned char	occupied;
 	char				*name;
 	unsigned int		x;
 	unsigned int		y;

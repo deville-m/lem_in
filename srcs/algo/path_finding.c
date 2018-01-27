@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 22:05:19 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/27 22:22:03 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,6 @@ t_dlist	*dpath_cmp(t_dlist *l1, t_dlist *l2)
 	return (NULL);
 }
 
-// static inline t_dlist	*get_next(t_room *end, t_dlist *res)
-// {
-// 	t_dlist	*min;
-// 	t_dlist *tmp;
-//
-// 	tmp = end->neighbours;
-// 	if (dpath_cmp(res, tmp))
-// 		tmp = tmp->next;
-// 	min = tmp;
-// 	while (tmp)
-// 	{
-// 		if (!dpath_cmp(res, tmp)
-// 			&& (ROOM(tmp)->cost < ROOM(min)->cost
-// 			|| (ROOM(tmp)->cost == ROOM(min)->cost
-// 			&& ft_dlstlen(ROOM(tmp)->neighbours) < ft_dlstlen(ROOM(min)->neighbours))))
-// 			min = tmp;
-// 		tmp = tmp->next;
-// 	}
-// 	return (min);
-// }
-
 static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 {
 	t_dlist *tmp;
@@ -57,6 +36,20 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 	{
 		if (ROOM(tmp) == end)
 			return (tmp);
+		if (!ROOM(tmp)->occupied && ROOM(tmp)->cost < ROOM(min)->cost && !find_room(past, ROOM(min)->name))
+			min = tmp;
+		tmp = tmp->next;
+	}
+	if (min && ROOM(min)->occupied)
+	{
+		while (min && find_room(past, ROOM(min)->name))
+			min = min->next;
+		tmp = (min) ? min->next : NULL;
+	}
+	while (tmp)
+	{
+		if (ROOM(tmp) == end)
+			return (tmp);
 		if (ROOM(tmp)->cost < ROOM(min)->cost && !find_room(past, ROOM(min)->name))
 			min = tmp;
 		tmp = tmp->next;
@@ -66,6 +59,7 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 
 t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 {
+	t_dlist	*next;
 	t_room	*goal;
 	t_dlist	*res;
 	t_dlist	*tmp;
@@ -88,5 +82,9 @@ t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 		ft_dlstprepend(&res, ft_dlstlink(ROOM(tmp), sizeof(end)));
 		end = ROOM(tmp);
 	}
+	next = (res) ? res->next : NULL;
+	if (res)
+		free(res);
+	res = next;
 	return (res);
 }

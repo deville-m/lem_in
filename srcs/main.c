@@ -6,11 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 22:06:43 by vlay             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
->>>>>>> 19225520f9d3f1258bd478241aad52f213d29412
+/*   Updated: 2018/01/27 15:39:50 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +56,15 @@ int			main(void)
 		ft_fprintf(2, "ERROR\n");
 		return (1);
 	}
-	//ft_dlstiter(list, print_room);
-	prepare(list, start, end);
-	path = NULL;
-	result = path_finding(list, find_room(list, "1"), end);
-	ft_dlstprepend(&path, ft_dlstlink(result, sizeof(t_dlist)));
-	// result = solve(list, start, end, nbant);
+	// prepare(list, start, end);
+	// path = NULL;
+	// result = path_finding(list, find_room(list, "1"), end);
+	// ft_dlstprepend(&path, ft_dlstlink(result, sizeof(t_dlist)));
+	result = solve(list, start, end, nbant);
 	ft_printf("result = %p\n", result);
+	ft_dlstiter(list, print_room);
 	// ft_dlstiter(result, print_room);
-	ft_dlstiter(path, print_path);
+	ft_dlstiter(result, print_path);
 	// lem_in(result, nbant);
 	// ft_dlstdel(&list, free_room);
 }
