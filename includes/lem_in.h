@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 20:18:39 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 21:57:34 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void					reconnect(t_dlist *elem);
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
 t_room					*find_double(t_dlist *p1, t_dlist *p2);
-void						prepare(t_dlist *list, t_room *begin, t_room *goal);
+void					prepare(t_dlist *list, t_room *begin);
 t_dlist					*get_max(t_dlist *list);
+void					clean_it(t_dlist *elem);
 
 /*
 ** Parsing related functions
@@ -71,7 +72,7 @@ t_dlist					*parse(t_room **start, t_room **end);
 t_dlist				*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant);
 void					addend(t_dlist *result, t_room *end);
 
-void					lem_in(t_dlist *list, t_dlist *result, unsigned int nbant, t_room *start, t_room *end);
+void					lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end);
 
 /*
 ** Output functions

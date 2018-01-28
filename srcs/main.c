@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 20:18:45 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 21:55:50 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int			main(void)
 	ft_dlstiter(list, print_room);
 	// ft_dlstiter(result, print_room);
 	ft_dlstiter(result, print_path);
-	lem_in(list, result, nbant, start, end);
+	ft_dlstiter(list, clean_it);
+	lem_in(result, nbant, start, end);
 	// ft_dlstdel(&list, free_room);
 }

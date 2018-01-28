@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 21:45:10 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 21:55:37 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,9 @@ void	clean_it(t_dlist *elem)
 	ROOM(elem)->in = 0;
 }
 
-void	apply(t_dlist *list, t_dlist *antloc[], t_room *end)
+void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
 {
+	t_dlist	*tmp;
 	size_t	j;
 	size_t	i;
 
@@ -141,13 +142,18 @@ void	apply(t_dlist *list, t_dlist *antloc[], t_room *end)
 			j++;
 		}
 		ft_printf("\n");
-		ft_dlstiter(list, clean_it);
+		tmp = result;
+		while (tmp)
+		{
+			ft_dlstiter(LIST(tmp), clean_it);
+			tmp = tmp->next;
+		}
 		if (ROOM(LIST(antloc[i])) == end)
 			i++;
 	}
 }
 
-void	lem_in(t_dlist *list, t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
+void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
 {
 	int		group[ft_dlstlen(result) + 1];
 	t_dlist	*antloc[nbant + 1];
@@ -156,6 +162,5 @@ void	lem_in(t_dlist *list, t_dlist *result, unsigned int nbant, t_room *start, t
 	print_grp(group);
 	addstartend(result, start, end);
 	setupgrp(result, antloc, group, nbant);
-	ft_dlstiter(list, clean_it);
-	apply(list, antloc, end);
+	apply(result, antloc, end);
 }

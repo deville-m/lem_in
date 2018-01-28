@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 18:01:29 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 21:57:35 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, si
 	return (best);
 }
 
-void	prepare(t_dlist *list, t_room *begin, t_room *goal)
+void	prepare(t_dlist *list, t_room *begin)
 {
 	t_dlist	*cmp;
 	t_dlist *tmp;
@@ -230,7 +230,7 @@ void	prepare(t_dlist *list, t_room *begin, t_room *goal)
 void	reverseall(t_dlist *list)
 {
 	t_dlist	*tmp;
-	
+
 	while (list)
 	{
 		tmp = LIST(list);
@@ -250,7 +250,7 @@ t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
 		start : end;
 	goal = (begin == start) ? end : start;
 	maxpath = ft_dlstlen(begin->neighbours);
-	prepare(list, begin, goal);
+	prepare(list, begin);
 	result = get_path(list, begin, goal, nbant, maxpath);
 	// if (begin == end)
 	// 	reverseall(result);
