@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/27 22:18:36 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 16:01:19 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,19 +120,25 @@ void	congestion(t_dlist *path)
 {
 	while (path)
 	{
-		ROOM(path)->occupied = 1;
+		ROOM(path)->occupied++;
 		path = path->next;
 	}
 }
 
-void	decongestion(t_dlist *list, t_room *begin)
+int	already_found(t_dlist *path)
 {
-	dijkstra(list, begin);
-	while (list)
+	t_dlist	*tmp;
+	size_t	found;
+
+	found = 0;
+	tmp = path;
+	while (tmp)
 	{
-		ROOM(list)->occupied = 0;
-		list = list->next;
+		if (ROOM(tmp)->occupied)
+			found++;
+		tmp = tmp->next;
 	}
+	return ((found == ft_dlstlen(path)) ? 1 : 0);
 }
 
 t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, size_t maxpath)
@@ -146,7 +152,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, si
 
 	best = NULL;
 	try = NULL;
-	while (!best && ft_dlstlen(best) < maxpath)
+	while (!best || ft_dlstlen(best) < maxpath)
 	{
 		current = begin->neighbours;
 		while (current)
@@ -158,7 +164,6 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, si
 			}
 			current = current->next;
 		}
-		group_up(try);
 		if ((st = score_it(try, nbant)) < (sb = score_it(best, nbant)))
 		{
 			ft_printf("score try = %zd | score best = %zd\n", st, sb);

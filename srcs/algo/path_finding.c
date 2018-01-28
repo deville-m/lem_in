@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/27 22:22:03 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 15:56:33 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,30 @@ t_dlist	*dpath_cmp(t_dlist *l1, t_dlist *l2)
 
 static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 {
+	char	limits;
 	t_dlist *tmp;
 	t_dlist *min;
 
-	min = room->neighbours;
-	while (min && find_room(past, ROOM(min)->name))
-		min = min->next;
-	tmp = (min) ? min->next : NULL;
-	while (tmp)
+	limits = 0;
+	while (1)
 	{
-		if (ROOM(tmp) == end)
-			return (tmp);
-		if (!ROOM(tmp)->occupied && ROOM(tmp)->cost < ROOM(min)->cost && !find_room(past, ROOM(min)->name))
-			min = tmp;
-		tmp = tmp->next;
-	}
-	if (min && ROOM(min)->occupied)
-	{
+		min = room->neighbours;
 		while (min && find_room(past, ROOM(min)->name))
 			min = min->next;
 		tmp = (min) ? min->next : NULL;
-	}
-	while (tmp)
-	{
-		if (ROOM(tmp) == end)
-			return (tmp);
-		if (ROOM(tmp)->cost < ROOM(min)->cost && !find_room(past, ROOM(min)->name))
-			min = tmp;
-		tmp = tmp->next;
+		while (tmp)
+		{
+			if (ROOM(tmp) == end)
+				return (tmp);
+			if (ROOM(tmp)->occupied <= limits
+				&& ROOM(tmp)->cost < ROOM(min)->cost
+				&& !find_room(past, ROOM(min)->name))
+				min = tmp;
+			tmp = tmp->next;
+		}
+		if (min && ROOM(min)->occupied <= limits)
+			break ;
+		limits++;
 	}
 	return (min);
 }
