@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 16:01:19 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 18:01:29 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,34 @@ char		**combi(t_dlist *try)
 	return (matrice);
 }
 
-t_dlist	*group_up(t_dlist *try)
+size_t	ft_strclen(char *str, char c)
 {
-	char	**cpy;
-	char	**matrice;
-	t_dlist	*group;
+	size_t	i;
 
-	group = NULL;
+	i = 0;
+	while (str && *str)
+	{
+		if (*str == c)
+			i++;
+		str++;
+	}
+	return (i);
+}
+
+size_t	group_up(t_dlist *try)
+{
+	size_t	i;
+	char	**matrice;
+
 	matrice = combi(try);
-	cpy = ft_tabcpy(matrice, ft_tabheight(matrice));
-	return (group);
+	i = 0;
+	while (matrice && matrice[i])
+	{
+		if (ft_strclen(matrice[i], '0') > 1)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void	congestion(t_dlist *path)
@@ -125,20 +143,27 @@ void	congestion(t_dlist *path)
 	}
 }
 
-int	already_found(t_dlist *path)
+size_t	cmpsame(t_dlist *try, t_dlist *best)
 {
-	t_dlist	*tmp;
-	size_t	found;
+	t_dlist	*tmp1;
+	t_dlist	*tmp2;
 
-	found = 0;
-	tmp = path;
-	while (tmp)
+	while (try && best)
 	{
-		if (ROOM(tmp)->occupied)
-			found++;
-		tmp = tmp->next;
+		tmp1 = LIST(try);
+		tmp2 = LIST(best);
+		while (tmp1 && tmp2
+			&& ROOM(tmp1) == ROOM(tmp2))
+		{
+			tmp1 = tmp1->next;
+			tmp2 = tmp2->next;
+		}
+		if (tmp1 || tmp2)
+			return (0);
+		try = try->next;
+		best = best->next;
 	}
-	return ((found == ft_dlstlen(path)) ? 1 : 0);
+	return (1);
 }
 
 t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, size_t maxpath)
@@ -149,11 +174,12 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, si
 	t_dlist	*try;
 	t_dlist	*best;
 	t_dlist	*current;
+	t_dlist	*next;
 
 	best = NULL;
-	try = NULL;
 	while (!best || ft_dlstlen(best) < maxpath)
 	{
+		try = NULL;
 		current = begin->neighbours;
 		while (current)
 		{
@@ -161,31 +187,56 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant, si
 			{
 				ft_dlstprepend(&try, ft_dlstlink(path, sizeof(*try)));
 				congestion(path);
+				if (!group_up(try))
+				{
+					next = try->next;
+					free(try);
+					try = next;
+					try->prev = NULL;
+				}
 			}
 			current = current->next;
 		}
 		if ((st = score_it(try, nbant)) < (sb = score_it(best, nbant)))
-		{
-			ft_printf("score try = %zd | score best = %zd\n", st, sb);
 			best = try;
-		}
+		if (cmpsame(try, best))
+			break ;
+		// ft_printf("score try = %zd | score best = %zd\n", st, sb);
 	}
 	return (best);
 }
 
 void	prepare(t_dlist *list, t_room *begin, t_room *goal)
 {
-	// t_dlist *tmp;
+	t_dlist	*cmp;
+	t_dlist *tmp;
 
 	// disconnect(begin);
 	dijkstra(list, begin);
 	// ft_dlstiter(list, print_room);
-	/*tmp = begin->neighbours;
+	tmp = begin->neighbours;
 	while (tmp)
 	{
-		disconnect(ROOM(tmp));
+		cmp = begin->neighbours;
+		while (cmp)
+		{
+			rm(tmp, ROOM(cmp));
+			cmp = cmp->next;
+		}
 		tmp = tmp->next;
-	}*/
+	}
+}
+
+void	reverseall(t_dlist *list)
+{
+	t_dlist	*tmp;
+	
+	while (list)
+	{
+		tmp = LIST(list);
+		ft_dlstreverse(&tmp);
+		list = list->next;
+	}
 }
 
 t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
@@ -201,6 +252,8 @@ t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
 	maxpath = ft_dlstlen(begin->neighbours);
 	prepare(list, begin, goal);
 	result = get_path(list, begin, goal, nbant, maxpath);
+	// if (begin == end)
+	// 	reverseall(result);
 	// ft_printf("result = %p\n", result);
 	return (result);
 }

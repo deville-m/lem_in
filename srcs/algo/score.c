@@ -6,31 +6,37 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:30:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/27 21:55:15 by vlay             ###   ########.fr       */
+/*   Updated: 2018/01/28 19:10:43 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <limits.h>
 
-size_t	score_it(t_dlist *route, unsigned int nbant)
+t_dlist	*get_max(t_dlist *list)
 {
-	size_t	plus;
-	size_t	maxlen;
 	t_dlist	*max;
-	t_dlist	*list;
 
 	max = NULL;
-	if (!(list = route))
-		return (UINT_MAX);
 	while (list)
 	{
 		if (!max || ft_dlstlen(LIST(list)) > ft_dlstlen(max))
 			max = LIST(list);
 		list = list->next;
 	}
+	return (max);
+}
+
+size_t	score_it(t_dlist *route, unsigned int nbant)
+{
+	size_t	plus;
+	size_t	maxlen;
+	t_dlist	*list;
+
+	if (!(list = route))
+		return (UINT_MAX);
 	list = route;
-	maxlen = ft_dlstlen(max);
+	maxlen = ft_dlstlen(get_max(list));
 	while (list)
 	{
 		if (nbant > maxlen - ft_dlstlen(LIST(list)))
