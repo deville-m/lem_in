@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:30:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 19:10:43 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/02 17:14:16 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	score_it(t_dlist *route, unsigned int nbant)
 	size_t	maxlen;
 	t_dlist	*list;
 
-	if (!(list = route))
+	if (!(list = route) || !ft_dlstlen(route))
 		return (UINT_MAX);
 	list = route;
 	maxlen = ft_dlstlen(get_max(list));

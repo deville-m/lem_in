@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 21:55:37 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/02 22:23:56 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,28 @@ void	setupgrp(t_dlist *result, t_dlist *antloc[], int group[], unsigned nbant)
 	i = 0;
 	tmp = NULL;
 	g = 0;
+	antloc[i] = NULL;
 	while (nbant)
 	{
 		if (group[g] == -1)
 			g = 0;
 		if (!tmp)
 			tmp = result;
-		antloc[i] = NULL;
-		ft_dlstprepend(&antloc[i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+		if (tmp && tmp->content)
+		{
+			ft_dlstprepend(&antloc[i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+			antloc[i] = NULL;
+		}
 		tmp = tmp->next;
 		if (group[g] > 0)
 		{
 			nbant--;
 			group[g] -= 1;
+			if (!nbant)
+				break ;
 		}
 		g++;
 	}
-	antloc[i] = NULL;
 }
 
 void	clean_it(t_dlist *elem)
@@ -122,10 +127,12 @@ void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
 	t_dlist	*tmp;
 	size_t	j;
 	size_t	i;
+	char	chg;
 
 	i = 0;
 	while (antloc[i])
 	{
+		chg = 0;
 		j = i;
 		while (antloc[j])
 		{
@@ -138,10 +145,12 @@ void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
 				ft_printf("L%u-%s ", j + 1, ROOM(LIST(antloc[j]))->name);
 				if (ROOM(LIST(antloc[j])) != end)
 					ROOM(LIST(antloc[j]))->in = 1;
+				chg++;
 			}
 			j++;
 		}
-		ft_printf("\n");
+		if (chg)
+			ft_printf("\n");
 		tmp = result;
 		while (tmp)
 		{

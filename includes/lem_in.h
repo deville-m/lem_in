@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/28 21:57:34 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/02 20:23:57 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct			s_room
 {
-	unsigned int		cost;
+	unsigned long long int		cost;
 	unsigned char	occupied;
 	char				*name;
 	unsigned int		x;
@@ -49,7 +49,7 @@ void					reconnect(t_dlist *elem);
 void					free_room(void *room, size_t room_size);
 int						room_cmp(const void *s1, const void *s2);
 t_room					*find_double(t_dlist *p1, t_dlist *p2);
-void					prepare(t_dlist *list, t_room *begin);
+void					prepare(t_dlist *list, t_room *begin, t_room *goal);
 t_dlist					*get_max(t_dlist *list);
 void					clean_it(t_dlist *elem);
 
