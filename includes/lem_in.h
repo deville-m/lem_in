@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/02 20:23:57 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/10 16:32:24 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ t_dlist					*path_finding(
 size_t						score_it(t_dlist *route, unsigned int nbant);
 void						generate(size_t i, t_room *tab[]);
 t_room					*path_cmp(t_dlist *l1, t_dlist *l2);
+t_dlist					*get_max(t_dlist *list);
 
 #endif

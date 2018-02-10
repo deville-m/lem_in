@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/02 22:23:56 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/10 19:05:57 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,85 +35,71 @@ void	addstartend(t_dlist *result, t_room *start, t_room *end)
 	}
 }
 
-void	initgrp(int group[], t_dlist *result, unsigned nbant)
+
+// void	setupgrp(t_dlist *result, t_dlist *antloc[], int group[], unsigned nbant)
+// {
+// 	t_dlist	*tmp;
+// 	unsigned	i;
+// 	unsigned	g;
+//
+// 	i = 0;
+// 	tmp = NULL;
+// 	g = 0;
+// 	antloc[i] = NULL;
+// 	while (nbant)
+// 	{
+// 		if (group[g] == -1)
+// 			g = 0;
+// 		if (!tmp)
+// 			tmp = result;
+// 		ft_dlstprepend(&antloc[i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+// 		antloc[i] = NULL;
+// 		tmp = tmp->next;
+// 		if (group[g] > 0)
+// 		{
+// 			nbant--;
+// 			group[g] -= 1;
+// 			if (!nbant)
+// 				break ;
+// 		}
+// 		g++;
+// 	}
+// }
+
+void	setupgrp(t_dlist *result, t_dlist *antloc[], unsigned nbant)
 {
 	t_dlist	*tmp;
-	size_t	i;
 	size_t	maxlen;
-	size_t	grp;
+	size_t	i;
+	size_t	j;
 
-	i = 0;
+	ft_printf("nbant = %u | maxlen = %u\n", nbant, maxlen = ft_dlstlen(get_max(result)) - 2);
+	j = 0;
 	tmp = result;
-	maxlen = ft_dlstlen(get_max(result));
-	while (tmp)
+	antloc[j] = NULL;
+	while (nbant && tmp)
 	{
-		group[i++] = maxlen - ft_dlstlen(LIST(tmp));
-		nbant -= maxlen - ft_dlstlen(LIST(tmp));
-		tmp = tmp->next;
-	}
-	group[i] = -1;
-	i = 0;
-	tmp = result;
-	grp = nbant / ft_dlstlen(result);
-	while (tmp)
-	{
-		group[i++] += grp;
-		tmp = tmp->next;
-	}
-	grp = nbant % ft_dlstlen(result);
-	tmp = result;
-	i = 0;
-	while (tmp)
-	{
-		if (grp)
+		i = 0;
+		ft_printf("chemin = %s | len = %u\n", ROOM(LIST(tmp)->next)->name, ft_dlstlen(LIST(tmp)) - 2);
+		while (nbant && i < maxlen - (ft_dlstlen(LIST(tmp)) - 2))
 		{
-			group[i]++;
-			grp--;
+			ft_printf("GET IN %s\n", ROOM(LIST(tmp)->next)->name);
+			ft_dlstprepend(&antloc[j + i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+			antloc[j + i] = NULL;
+			nbant--;
 		}
-		i++;
+		j += i;
 		tmp = tmp->next;
 	}
-}
-
-void	print_grp(int group[])
-{
-	while (*group >= 0)
-	{
-		ft_printf("group = %d\n", *group);
-		group++;
-	}
-}
-
-void	setupgrp(t_dlist *result, t_dlist *antloc[], int group[], unsigned nbant)
-{
-	t_dlist	*tmp;
-	unsigned	i;
-	unsigned	g;
-
-	i = 0;
-	tmp = NULL;
-	g = 0;
-	antloc[i] = NULL;
+	tmp = result;
 	while (nbant)
 	{
-		if (group[g] == -1)
-			g = 0;
 		if (!tmp)
 			tmp = result;
-		if (tmp && tmp->content)
-		{
-			ft_dlstprepend(&antloc[i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
-			antloc[i] = NULL;
-		}
+		ft_dlstprepend(&antloc[j++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+		antloc[j] = NULL;
 		tmp = tmp->next;
-		if (group[g] > 0)
-		{
-			nbant--;
-			group[g] -= 1;
-			if (!nbant)
-				break ;
-		}
-		g++;
+		nbant--;
 	}
 }
 
@@ -164,12 +150,9 @@ void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
 
 void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
 {
-	int		group[ft_dlstlen(result) + 1];
 	t_dlist	*antloc[nbant + 1];
 
-	initgrp(group, result, nbant);
-	print_grp(group);
 	addstartend(result, start, end);
-	setupgrp(result, antloc, group, nbant);
+	setupgrp(result, antloc, nbant);
 	apply(result, antloc, end);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:20:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 16:26:54 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/10 18:50:30 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_strnjoin(size_t n, ...);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
+size_t	ft_strclen(char *str, char c);
 char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncasecmp(const char *s1, const char *s2, size_t n);
