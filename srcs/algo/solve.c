@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/10 20:31:53 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/10 22:19:41 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,22 +236,66 @@ size_t	mapcomplete(t_dlist *list, t_room *begin, t_room *goal)
 	return ((i >= len - 2) ? 1 : 0);
 }
 
+size_t	already(t_dlist *l1, t_dlist *l2)
+{
+	if (!l1 || !l2)
+		return (0);
+	while (l1 && l2)
+	{
+		if (ROOM(l1) != ROOM(l2))
+			return (0);
+		l1 = l1->next;
+		l2 = l2->next;
+	}
+	return (1);
+}
+
+size_t	alreadyfound(t_dlist *list, t_dlist *path)
+{
+	t_dlist	*l;
+	t_dlist *p;
+
+	if (!list)
+		return (0);
+	while (list)
+	{
+		p = path;
+		l = LIST(list);
+		if (already(l, p))
+			return (1);
+		list = list->next;
+	}
+	return (0);
+}
+
 t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 {
 	t_dlist	*path;
 	t_dlist	*try;
 	t_dlist	*best;
 	t_dlist	*group;
+	size_t	pick;
 
 	best = NULL;
 	try = NULL;
+	pick = 0;
 	while (!best || (ft_dlstlen(best) < ft_dlstlen(begin->neighbours) && !mapcomplete(list, begin, goal)))
 	{
 		if ((path = path_finding(list, begin, goal)))
 		{
-			ft_dlstprepend(&try, ft_dlstlink(path, sizeof(*try)));
+			if (!alreadyfound(try, path))
+			{
+				ft_dlstprepend(&try, ft_dlstlink(path, sizeof(*try)));
+				pick++;
+			}
+			else
+				pick = 0;
 			congestion(path);
 		}
+		if (pick == ft_dlstlen(begin->neighbours))
+			return (best);
+		// ft_dlstiter(list, print_room);
+		ft_dlstiter(try, print_path);
 		group = group_up(try);
 		if (score_it(group, nbant) < score_it(best, nbant))
 			best = group;
