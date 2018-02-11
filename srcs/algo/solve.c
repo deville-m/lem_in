@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/10 22:19:41 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/11 18:53:54 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char		**combi(t_dlist *try)
 	t_dlist	*cmp;
 	size_t	dlstlen;
 
+	if (!try)
+		return(NULL);
 	dlstlen = ft_dlstlen(try);
 	j = 0;
 	matrice = (char **)malloc(sizeof(char *) * (dlstlen + 1));
@@ -95,11 +97,11 @@ char		**combi(t_dlist *try)
 	}
 	matrice[j] = NULL;
 	j = 0;
-	while (matrice[j])
-	{
-		ft_printf("%s\n", matrice[j]);
-		j++;
-	}
+	// while (matrice[j])
+	// {
+	// 	ft_printf("%s\n", matrice[j]);
+	// 	j++;
+	// }
 	return (matrice);
 }
 
@@ -117,6 +119,8 @@ size_t	compatible(char **matrice)
 	size_t	i;
 
 	i = 0;
+	if (!matrice)
+		return (0);
 	while (matrice && matrice[i])
 	{
 		if (ft_strclen(matrice[i], '0') > 1)
@@ -165,21 +169,26 @@ t_dlist	*ft_dlstdup(t_dlist *src)
 	return (dup);
 }
 
+int	sort_it(t_dlist *l1, t_dlist *l2)
+{
+	return ((ft_dlstlen(l1) - ft_dlstlen(l2)));
+}
+
 t_dlist	*group_up(t_dlist *try)
 {
 	t_dlist	*group;
-	int	i;
 	char	**matrice;
 
-	matrice = combi(try);
-	group = ft_dlstdup(try);
-	while (!compatible(matrice))
+	group = NULL;
+	while (!group || try)
 	{
-		if ((i = get_min(group, matrice)) < 0)
-			return (NULL);
-		ft_dlstremove(&group, LIST(ft_dlstlookfor(group, i)), dlstsame);
-		matrice = combi(group);
+		ft_dlstprepend(&group, ft_dlstnew(LIST(try), sizeof(*try)));
+		if (!compatible(matrice = combi(group)))
+			ft_dlstpop(&group);
+		try = try->next;
 	}
+	ft_printf("NEW GRP:\n");
+	ft_dlstiter(group, print_path);
 	return (group);
 }
 
@@ -226,7 +235,7 @@ size_t	mapcomplete(t_dlist *list, t_room *begin, t_room *goal)
 	len = ft_dlstlen(list);
 	while (tmp)
 	{
-		if (ROOM(tmp)->occupied == len)
+		if (ROOM(tmp)->occupied >= len)
 			return (1);
 		if (ROOM(tmp) != begin && ROOM(tmp) != goal && ROOM(tmp)->occupied > 1)
 			i++;
@@ -279,61 +288,42 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 	best = NULL;
 	try = NULL;
 	pick = 0;
-	while (!best || (ft_dlstlen(best) < ft_dlstlen(begin->neighbours) && !mapcomplete(list, begin, goal)))
+	while (!best || (ft_dlstlen(best) < ft_dlstlen(begin->neighbours) + 5 && !mapcomplete(list, begin, goal)))
 	{
+		// Est-ce tu as trouver un path?
 		if ((path = path_finding(list, begin, goal)))
 		{
+			// Si oui, est-ce que c'est un path qui a deja ete trouver?
 			if (!alreadyfound(try, path))
 			{
+				// Si oui, tu le rajoute a try
 				ft_dlstprepend(&try, ft_dlstlink(path, sizeof(*try)));
-				pick++;
+				pick = 0;
 			}
 			else
-				pick = 0;
-			congestion(path);
+				pick++;
+			// J'incremente occupied pour dire qu'un chemin a deja pris ces noeuds
 		}
-		if (pick == ft_dlstlen(begin->neighbours))
-			return (best);
+		// Si apres une rotation de tout les neighbours tu ne trouve pas de nouveau path alors tu quitte
+		if (pick > ft_dlstlen(begin->neighbours))
+			break ;
 		// ft_dlstiter(list, print_room);
+		ft_printf("path : \n");
 		ft_dlstiter(try, print_path);
-		group = group_up(try);
-		if (score_it(group, nbant) < score_it(best, nbant))
+		// Je regarde si le nouveau group de chemin est meilleur que mon best
+		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
+		{
+			ft_dlstdel(&best, NULL);
 			best = group;
+		}
+		else
+			ft_dlstdel(&group, NULL);
+		ft_printf("best : \n");
+		ft_dlstiter(best, print_path);
 	}
+	ft_dlstdel(&try, NULL);
 	return (best);
 }
-
-// t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
-// {
-// 	t_dlist	*path;
-// 	t_dlist	*try;
-// 	t_dlist	*best;
-// 	t_dlist	*current;
-//
-// 	best = NULL;
-// 	current = NULL;
-// 	while (!best || ft_dlstlen(best) < ft_dlstlen(begin->neighbours))
-// 	{
-// 		try = NULL;
-// 		if (!current)
-// 			current = begin->neighbours;
-// 		while (current)
-// 		{
-// 			if ((path = path_finding(list, begin, goal)))
-// 			{
-// 				ft_dlstprepend(&try, ft_dlstlink(path, sizeof(*try)));
-// 				congestion(path);
-// 			}
-// 			current = current->next;
-// 		}
-// 		group_up(try);
-// 		if (score_it(try, nbant)< score_it(best, nbant))
-// 			best = try;
-// 		else if (cmpsame(try, best))
-// 			break ;
-// 	}
-// 	return (best);
-// }
 
 void	prepare(t_dlist *list, t_room *begin, t_room *goal)
 {
@@ -364,6 +354,7 @@ void	prepare(t_dlist *list, t_room *begin, t_room *goal)
 		}
 		tmp = tmp->next;
 	}
+	// disconnect(goal);
 	dijkstra(list, begin);
 }
 

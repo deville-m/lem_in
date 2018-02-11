@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/10 19:05:57 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/11 18:22:41 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ void	setupgrp(t_dlist *result, t_dlist *antloc[], unsigned nbant)
 	while (nbant && tmp)
 	{
 		i = 0;
-		ft_printf("chemin = %s | len = %u\n", ROOM(LIST(tmp)->next)->name, ft_dlstlen(LIST(tmp)) - 2);
 		while (nbant && i < maxlen - (ft_dlstlen(LIST(tmp)) - 2))
 		{
-			ft_printf("GET IN %s\n", ROOM(LIST(tmp)->next)->name);
 			ft_dlstprepend(&antloc[j + i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
 			antloc[j + i] = NULL;
 			nbant--;
