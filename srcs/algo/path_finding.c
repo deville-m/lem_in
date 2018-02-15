@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/11 17:51:33 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/15 19:16:56 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 				return (tmp);
 			if ((ROOM(tmp)->occupied <= limits
 				&& ROOM(tmp)->cost < ROOM(min)->cost
-				&& !find_room(past, ROOM(min)->name)))
+				&& !find_room(past, ROOM(tmp)->name)))
 				min = tmp;
 			tmp = tmp->next;
 		}
