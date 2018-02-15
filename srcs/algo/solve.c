@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/15 20:49:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:55:06 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,8 +398,7 @@ t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
 	prepare(list, begin, goal);
 	result = get_path(list, begin, goal, nbant);
 	// refaire la fonction qui reverse les listes parce qu'elle fait sauter le premier maillon
-	// if (begin == end)
-	// 	ft_dlstreverse(&result);
-	// ft_printf("result = %p\n", result);
+	if (begin == end)
+		ft_dlstiter(result, reverseall);
 	return (result);
 }
