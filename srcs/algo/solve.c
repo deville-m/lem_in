@@ -6,11 +6,24 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/15 19:21:32 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/15 20:49:05 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+size_t ft_strclen(const char *str, int c)
+{
+	size_t i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str++ == c)
+			i++;
+	}
+	return (i);
+}
 
 t_room	*path_cmp(t_dlist *l1, t_dlist *l2)
 {
@@ -154,6 +167,7 @@ t_dlist	*ft_dlstdup(t_dlist *src)
 	}
 	return (dup);
 }
+
 
 void	ft_tabdel(char **tab)
 {

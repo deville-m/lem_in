@@ -6,3 +6,4 @@ tests.c
 test*
 lem-in
 libft.a
+.obj
