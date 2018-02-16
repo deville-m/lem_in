@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/10 16:32:24 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 18:07:25 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void					clean_it(t_dlist *elem);
 ** Parsing related functions
 */
 
+int						logger(char *line, int mode);
 int						is_comment(const char *line);
 int						is_command(const char *line);
 int						is_room(const char *line);

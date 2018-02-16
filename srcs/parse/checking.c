@@ -6,14 +6,13 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 10:03:16 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/24 21:05:15 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/16 18:14:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "ft_string.h"
 #include "lst.h"
-#include "ft_printf.h"
 
 int		is_comment(const char *line)
 {
@@ -79,6 +78,5 @@ int		is_valid_connexion(t_dlist *list, char *line)
 
 void	comment(char *line)
 {
-	ft_printf("%s\n", line);
 	free(line);
 }

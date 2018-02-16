@@ -9,6 +9,7 @@ LIB = libft.a
 LIBDIR = libft
 
 SRC =	main.c \
+		log.c \
 		parse/checking.c \
 		parse/parse.c \
 		output/print_room.c \
