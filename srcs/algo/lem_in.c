@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/11 18:22:41 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 17:21:32 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	addstartend(t_dlist *result, t_room *start, t_room *end)
 	while (tmp)
 	{
 		add = LIST(tmp);
+		if (!ROOM(add))
+			ft_dlstpop(&add);
 		ft_dlstappend(&add, ft_dlstlink(end, sizeof(*end)));
 	 	tmp->content = add;
 		tmp = tmp->next;
@@ -34,37 +36,6 @@ void	addstartend(t_dlist *result, t_room *start, t_room *end)
 		tmp = tmp->next;
 	}
 }
-
-
-// void	setupgrp(t_dlist *result, t_dlist *antloc[], int group[], unsigned nbant)
-// {
-// 	t_dlist	*tmp;
-// 	unsigned	i;
-// 	unsigned	g;
-//
-// 	i = 0;
-// 	tmp = NULL;
-// 	g = 0;
-// 	antloc[i] = NULL;
-// 	while (nbant)
-// 	{
-// 		if (group[g] == -1)
-// 			g = 0;
-// 		if (!tmp)
-// 			tmp = result;
-// 		ft_dlstprepend(&antloc[i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
-// 		antloc[i] = NULL;
-// 		tmp = tmp->next;
-// 		if (group[g] > 0)
-// 		{
-// 			nbant--;
-// 			group[g] -= 1;
-// 			if (!nbant)
-// 				break ;
-// 		}
-// 		g++;
-// 	}
-// }
 
 void	setupgrp(t_dlist *result, t_dlist *antloc[], unsigned nbant)
 {
@@ -146,11 +117,25 @@ void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
 	}
 }
 
+void	antlocdel(t_dlist *antloc[])
+{
+	size_t	i;
+
+	i = 0;
+	while (antloc[i])
+	{
+		ft_dlstdel(&antloc[i], NULL);
+		i++;
+	}
+}
+
 void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
 {
 	t_dlist	*antloc[nbant + 1];
 
 	addstartend(result, start, end);
+	ft_printf("LEN = %u | PATH : \n", ft_dlstlen(LIST(result)));
+	ft_dlstiter(result, print_path);
 	setupgrp(result, antloc, nbant);
 	apply(result, antloc, end);
 }

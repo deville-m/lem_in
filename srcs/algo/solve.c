@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/16 15:43:24 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 18:22:02 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ t_dlist	*group_up(t_dlist *try)
 	char	**matrice;
 
 	group = NULL;
-	while (!group || try)
+	while (try)
 	{
 		ft_dlstprepend(&group, ft_dlstnew(LIST(try), sizeof(*try)));
 		if (!compatible(matrice = combi(group)))
@@ -398,7 +398,7 @@ t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
 	prepare(list, begin, goal);
 	result = get_path(list, begin, goal, nbant);
 	// refaire la fonction qui reverse les listes parce qu'elle fait sauter le premier maillon
-	if (begin == end)
-		ft_dlstiter(result, reverseall);
+	// if (begin == end)
+	// 	ft_dlstiter(result, reverseall);
 	return (result);
 }

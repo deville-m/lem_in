@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/16 15:41:43 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 18:19:13 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 	{
 		// ft_printf("lol\n");
 		min = room->neighbours;
-		while (min && (find_room(past, ROOM(min)->name) || ROOM(min)->occupied > limits))
+		if (ROOM(min) == start)
+			return (min);
+		while (min && ROOM(min) != start && (find_room(past, ROOM(min)->name) || ROOM(min)->occupied > limits))
 			min = min->next;
 		tmp = (min) ? min->next : NULL;
 		while (tmp)
@@ -76,7 +78,6 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 
 t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 {
-	t_dlist	*next;
 	t_room	*goal;
 	t_dlist	*res;
 	t_dlist	*tmp;
@@ -100,9 +101,11 @@ t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 		ft_dlstprepend(&res, ft_dlstlink(ROOM(tmp), sizeof(end)));
 		end = ROOM(tmp);
 	}
-	next = (res) ? res->next : NULL;
-	if (res)
-		free(res);
-	res = next;
+	if (res && ft_dlstlen(res))
+	{
+		ft_dlstpop(&res);
+		if (!res)
+			ft_dlstprepend(&res, ft_dlstlink(NULL, sizeof(t_dlist *)));
+	}
 	return (res);
 }

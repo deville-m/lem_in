@@ -1,6 +1,6 @@
 NAME = lem-in
 CC = gcc
-CFLAGS = -Wall -Wextra -fsanitize=address
+CFLAGS = -Wall -Wextra
 INCLUDES = -Iincludes/ -Ilibft/includes
 LDLIB = -Llibft/
 LDFLAGS = -lft

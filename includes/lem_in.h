@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/10 16:32:24 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 17:56:08 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_room					*find_double(t_dlist *p1, t_dlist *p2);
 void					prepare(t_dlist *list, t_room *begin, t_room *goal);
 t_dlist					*get_max(t_dlist *list);
 void					clean_it(t_dlist *elem);
+void					free_path(void *elem, size_t	size);
 
 /*
 ** Parsing related functions
