@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/15 21:14:06 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 15:55:26 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	get_nbant(unsigned int *nbant)
 	}
 	if (!tmp
 		|| !ft_str_is_numeric(tmp)
-		|| !(*nbant = ft_atoi(tmp)))
+		|| !(*nbant = ft_atou(tmp)))
 	{
 		free(tmp);
 		ft_fprintf(2, "ERROR\n");
