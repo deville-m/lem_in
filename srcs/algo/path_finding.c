@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/15 21:28:51 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 15:41:43 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ size_t	possible(t_dlist *past, t_room *curr)
 	return (i);
 }
 
-static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
+static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 {
 	char	limits;
 	t_dlist *tmp;
@@ -50,13 +50,14 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 		return (NULL);
 	while (1)
 	{
+		// ft_printf("lol\n");
 		min = room->neighbours;
 		while (min && (find_room(past, ROOM(min)->name) || ROOM(min)->occupied > limits))
 			min = min->next;
 		tmp = (min) ? min->next : NULL;
 		while (tmp)
 		{
-			if (ROOM(tmp) == end)
+			if (ROOM(tmp) == start)
 				return (tmp);
 			if ((ROOM(tmp)->occupied <= limits
 				&& ROOM(tmp)->cost < ROOM(min)->cost
@@ -64,7 +65,7 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *end)
 				min = tmp;
 			tmp = tmp->next;
 		}
-		if (min && find_room(past, ROOM(min)->name))
+		if (past && min && find_room(past, ROOM(min)->name))
 			min = NULL;
 		if (min && ROOM(min)->occupied <= limits)
 			break ;
@@ -88,7 +89,7 @@ t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 	while (end != start)
 	{
 		ft_printf("end = %s\n", end->name);
-		tmp = get_next(end, res, goal);
+		tmp = get_next(end, res, start);
 		if (!tmp)
 		{
 			ft_dlstdel(&res, NULL);

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/15 20:55:06 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 15:43:24 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 	best = NULL;
 	try = NULL;
 	pick = 0;
-	maxpath = (ft_dlstlen(begin->neighbours) > nbant) ? ft_dlstlen(begin->neighbours) : nbant;
+	maxpath = (ft_dlstlen(begin->neighbours) > nbant) ? nbant : ft_dlstlen(begin->neighbours);
 	while (!best || (ft_dlstlen(best) < maxpath && !mapcomplete(list, begin, goal)))
 	{
 		// Est-ce tu as trouver un path?
