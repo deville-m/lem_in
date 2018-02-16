@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/16 17:56:08 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 18:23:31 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void					free_path(void *elem, size_t	size);
 ** Parsing related functions
 */
 
+int						logger(char *line, int mode);
 int						is_comment(const char *line);
 int						is_command(const char *line);
 int						is_room(const char *line);

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/27 19:48:52 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/16 18:20:04 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void			parse_room(t_dlist **list, char *line)
 	t_room	res;
 	size_t	i;
 
-	ft_printf("%s\n", line);
 	to_free = line;
 	i = 0;
 	while (line[i] != ' ')
@@ -50,9 +49,8 @@ static void			parse_command(
 	command = is_command(line);
 	if (command == 3)
 		return ;
-	ft_printf("%s\n", line);
 	free(line);
-	while (get_next_line(0, &line) == 1 && is_comment(line))
+	while (get_next_line(0, &line) == 1 && logger(line, 0) && is_comment(line))
 		free(line);
 	if (is_room(line))
 	{
@@ -76,7 +74,6 @@ static void			parse_connexion(t_dlist *list, char *line)
 	line += 1;
 	tmp1 = find_room(list, first);
 	tmp2 = find_room(list, line);
-	ft_printf("%s-%s\n", first, line);
 	ft_dlstprepend(&tmp1->neighbours, ft_dlstlink(tmp2, sizeof(t_room)));
 	ft_dlstprepend(&tmp2->neighbours, ft_dlstlink(tmp1, sizeof(t_room)));
 	free(first);
@@ -90,6 +87,7 @@ static inline int	first_line(t_dlist *list, char *line)
 		return (norm);
 	else if (is_valid_connexion(list, line))
 	{
+		logger(line, 0);
 		parse_connexion(list, line);
 		norm = 1;
 	}
@@ -103,7 +101,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 	char	*line;
 
 	list = NULL;
-	while (get_next_line(0, &line) == 1
+	while (get_next_line(0, &line) == 1 && logger(line, 0)
 			&& ((ret = is_room(line)) || *line == '#'))
 	{
 		if (ret)
@@ -113,7 +111,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 		else
 			comment(line);
 	}
-	while (first_line(list, line) && get_next_line(0, &line) == 1
+	while (first_line(list, line) && get_next_line(0, &line) == 1 && logger(line, 0)
 			&& ((ret = is_valid_connexion(list, line)) || is_comment(line)))
 	{
 		if (ret)
