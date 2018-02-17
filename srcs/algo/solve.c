@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:22:36 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:43:04 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,9 @@ t_dlist	*group_up(t_dlist *try)
 	while (try)
 	{
 		ft_dlstprepend(&group, ft_dlstlink(LIST(try), sizeof(*try)));
-		// if (!compatible(matrice = combi(group)))
-		// 	ft_dlstpop(&group);
-		// ft_tabdel(matrice);
+		if (!compatible(matrice = combi(group)))
+			ft_dlstpop(&group);
+		ft_tabdel(matrice);
 		try = try->next;
 	}
 	return (group);
@@ -334,8 +334,8 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 	try = NULL;
 	pick = 0;
 	maxpath = (ft_dlstlen(begin->neighbours) > nbant) ? nbant : ft_dlstlen(begin->neighbours);
-	// while (!best || (ft_dlstlen(best) < maxpath && !mapcomplete(list, begin, goal)))
-	// {
+	while (!best || (ft_dlstlen(best) < maxpath && !mapcomplete(list, begin, goal)))
+	{
 		if ((path = path_finding(list, begin, goal)))
 		{
 			if (!alreadyfound(try, path))
@@ -349,12 +349,11 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 				free_path(path, sizeof(*path));
 			}
 		}
-		// if (pick > ft_dlstlen(begin->neighbours))
-		// 	break ;
+		if (pick > ft_dlstlen(begin->neighbours))
+			break ;
 		// ft_dlstiter(list, print_room);
 		ft_printf("path : \n");
 		ft_dlstiter(try, print_path);
-		group = group_up(try);
 		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
 		{
 			ft_dlstdel(&best, NULL);
@@ -363,7 +362,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 		ft_dlstdel(&group, NULL);
 		ft_printf("best : \n");
 		ft_dlstiter(best, print_path);
-	// }
+	}
 	ft_dlstdel(&try, free_path);
 	return (best);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 17:21:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:23:32 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:40:21 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_dlist				*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant);
 void					addend(t_dlist *result, t_room *end);
 
 void					lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end);
+// t_dlist				*group_up(t_dlist *try);
 
 /*
 ** Output functions
@@ -101,5 +102,6 @@ size_t						score_it(t_dlist *route, unsigned int nbant);
 void						generate(size_t i, t_room *tab[]);
 t_room					*path_cmp(t_dlist *l1, t_dlist *l2);
 t_dlist					*get_max(t_dlist *list);
+// t_dlist					*ft_dlstdup(t_dlist *src);
 
 #endif
