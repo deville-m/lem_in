@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 14:47:20 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/17 15:36:35 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void			parse_room(t_dlist **list, char *line)
 	res.neighbours = NULL;
 	res.removed = NULL;
 	res.occupied = 0;
+	res.in = 0;
 	ft_dlstprepend(list, ft_dlstnew(&res, sizeof(res)));
 	free(to_free);
 }
@@ -80,7 +81,7 @@ static void			parse_connexion(t_dlist *list, char *line)
 	free(first);
 }
 
-static inline int	first_line(t_dlist *list, char *line)
+static inline int	first(t_dlist *list, char *line)
 {
 	static int norm = 0;
 
@@ -112,7 +113,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 		else
 			comment(line);
 	}
-	while (first_line(list, line) && get_next_line(0, &line) == 1 && logger(line, 0)
+	while (first(list, line) && get_next_line(0, &line) == 1 && logger(line, 0)
 			&& ((ret = is_valid_connexion(list, line)) || is_comment(line)))
 	{
 		if (ret)

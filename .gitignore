@@ -9,3 +9,5 @@ libft.a
 .obj
 Maps
 Lem-in-checker
+Result
+*.dSYM
