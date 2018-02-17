@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 18:25:51 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:33:40 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 		}
 		if (pick > ft_dlstlen(begin->neighbours))
 			break ;
-		// ft_dlstiter(list, print_room);
 		ft_printf("path : \n");
 		ft_dlstiter(try, print_path);
 		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
