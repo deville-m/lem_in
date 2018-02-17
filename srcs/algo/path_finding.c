@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:39:09 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:47:46 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 		return (NULL);
 	while (1)
 	{
+		// ft_printf("lol\n");
 		min = room->neighbours;
 		if (ROOM(min) == start)
 			return (min);

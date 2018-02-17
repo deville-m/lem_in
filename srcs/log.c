@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 17:39:01 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 15:27:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:40:42 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		logger(char *line, int mode)
 {
 	static t_dlist *logger = NULL;
 
-	if (mode && !logger)
+	if (mode && logger)
 	{
 		ft_dlstreverse(&logger);
 		ft_dlstiter(logger, log_print);

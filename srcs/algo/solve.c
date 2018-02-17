@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:43:04 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:06:39 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,26 +150,6 @@ int	get_min(t_dlist *try, char **matrice)
 	return (min);
 }
 
-int	dlstsame(const void *s1, const void *s2)
-{
-	return ((s1 == s2) ? 0 : 1);
-}
-
-t_dlist	*ft_dlstcp(t_dlist *head)
-{
-	t_dlist *res;
-
-	res = NULL;
-	if (!head)
-		return (NULL);
-	while (head)
-	{
-		ft_dlstprepend(&res, ft_dlstnew(ROOM(head), head->content_size));
-		head = head->next;
-	}
-	return (res);
-}
-
 t_dlist	*ft_dlstdup(t_dlist *src)
 {
 	t_dlist	*res;
@@ -206,11 +186,6 @@ void	ft_tabdel(char **tab)
 	free(tab);
 }
 
-int	sort_it(t_dlist *l1, t_dlist *l2)
-{
-	return ((ft_dlstlen(l1) - ft_dlstlen(l2)));
-}
-
 t_dlist	*group_up(t_dlist *try)
 {
 	t_dlist	*group;
@@ -221,20 +196,16 @@ t_dlist	*group_up(t_dlist *try)
 	{
 		ft_dlstprepend(&group, ft_dlstlink(LIST(try), sizeof(*try)));
 		if (!compatible(matrice = combi(group)))
+		{
 			ft_dlstpop(&group);
+			group->prev = NULL;
+		}
 		ft_tabdel(matrice);
 		try = try->next;
 	}
+	ft_printf("GROUP :\n");
+	ft_dlstiter(group, print_path);
 	return (group);
-}
-
-void	congestion(t_dlist *path)
-{
-	while (path)
-	{
-		ROOM(path)->occupied++;
-		path = path->next;
-	}
 }
 
 size_t	cmpsame(t_dlist *try, t_dlist *best)
@@ -356,7 +327,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 		ft_dlstiter(try, print_path);
 		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
 		{
-			ft_dlstdel(&best, NULL);
+			ft_dlstdel(&best, free_path);
 			best = ft_dlstdup(group);
 		}
 		ft_dlstdel(&group, NULL);

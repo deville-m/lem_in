@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 18:27:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 15:32:19 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:05:31 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_dlist	*ft_dlstpop(t_dlist **alst)
 	if (!alst || !*alst)
 		return (NULL);
 	res = *alst;
+	(*alst)->prev = NULL;
 	*alst = (*alst)->next;
 	content = res->content;
 	free(res);
