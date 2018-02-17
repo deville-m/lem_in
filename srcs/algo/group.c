@@ -13,56 +13,23 @@ size_t ft_strclen(const char *str, int c)
 	return (i);
 }
 
-char	**ft_tabcpy(char **tab, size_t hauteur)
-{
-	char	**cpy;
-	size_t	j;
-	size_t	i;
-
-	j = 0;
-	cpy = (char **)malloc(sizeof(char *) * (hauteur + 1));
-	while (tab[j])
-	{
-		i = 0;
-		cpy[j] = ft_strdup(tab[j]);
-		j++;
-	}
-	cpy[j] = NULL;
-	return (cpy);
-}
-
-size_t	ft_tabheight(char **tab)
+char		**combi(t_dlist *try, size_t j)
 {
 	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-char		**combi(t_dlist *try)
-{
-	size_t	i;
-	size_t	j;
 	char	**matrice;
 	t_dlist	*tmp;
 	t_dlist	*cmp;
-	size_t	dlstlen;
 
 	if (!try)
-		return(NULL);
-	dlstlen = ft_dlstlen(try);
+		return (NULL);
 	j = 0;
-	matrice = (char **)malloc(sizeof(char *) * (dlstlen + 1));
+	matrice = (char **)malloc(sizeof(char *) * (ft_dlstlen(try) + 1));
 	tmp = try;
 	while (tmp)
 	{
 		i = 0;
 		cmp = try;
-		matrice[j] = (char *)malloc(sizeof(char) * (dlstlen + 1));
+		matrice[j] = (char *)malloc(sizeof(char) * (ft_dlstlen(try) + 1));
 		while (cmp)
 		{
 			matrice[j][i++] = (!path_cmp(tmp, cmp)) ? '1' : '0';
@@ -72,7 +39,6 @@ char		**combi(t_dlist *try)
 		tmp = tmp->next;
 	}
 	matrice[j] = NULL;
-	j = 0;
 	return (matrice);
 }
 
@@ -114,20 +80,6 @@ t_dlist	*ft_dlstdup(t_dlist *src)
 	return (dup);
 }
 
-
-void	ft_tabdel(char **tab)
-{
-	size_t	j;
-
-	j = 0;
-	while (tab[j])
-	{
-		free(tab[j]);
-		j++;
-	}
-	free(tab);
-}
-
 t_dlist	*group_up(t_dlist *try)
 {
 	t_dlist	*group;
@@ -137,7 +89,7 @@ t_dlist	*group_up(t_dlist *try)
 	while (try)
 	{
 		ft_dlstprepend(&group, ft_dlstlink(LIST(try), sizeof(*try)));
-		if (!compatible(matrice = combi(group)))
+		if (!compatible(matrice = combi(group, 0)))
 		{
 			ft_dlstpop(&group);
 			group->prev = NULL;

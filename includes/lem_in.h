@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 17:21:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 18:24:45 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 19:16:37 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int						room_cmp(const void *s1, const void *s2);
 t_room					*find_double(t_dlist *p1, t_dlist *p2);
 void					prepare(t_dlist *list, t_room *begin, t_room *goal);
 t_dlist					*get_max(t_dlist *list);
-void					clean_it(t_dlist *elem);
 void					free_path(void *elem, size_t	size);
 void					free_best(t_dlist *src);
 
@@ -104,5 +103,10 @@ void						generate(size_t i, t_room *tab[]);
 t_room					*path_cmp(t_dlist *l1, t_dlist *l2);
 t_dlist					*get_max(t_dlist *list);
 t_dlist					*ft_dlstdup(t_dlist *src);
+
+
+char	**ft_tabcpy(char **tab, size_t hauteur);
+size_t	ft_tabheight(char **tab);
+void	ft_tabdel(char **tab);
 
 #endif

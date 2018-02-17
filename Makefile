@@ -31,7 +31,8 @@ SRC =	main.c \
 		algo/group.c \
 		algo/alreadyfound.c \
 		algo/path_cmp.c \
-		algo/prepare.c
+		algo/prepare.c \
+		algo/tab.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)
