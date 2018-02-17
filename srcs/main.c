@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 15:34:28 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/17 16:02:50 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void		free_path(void *elem, size_t size)
 	t_dlist	*next;
 	t_dlist	*list;
 
+	if (!elem)
+		return ;
 	list = (t_dlist *)elem;
 	(void)size;
 	while (list)
@@ -82,6 +84,6 @@ int			main(void)
 	// ft_dlstiter(list, print_room);
 	// ft_dlstiter(result, print_path);
 	// lem_in(result, nbant, start, end);
-	ft_dlstdel(&result, free_path);
+	ft_dlstsupp(&result);
 	ft_dlstdel(&list, free_room);
 }

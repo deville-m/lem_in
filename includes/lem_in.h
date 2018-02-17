@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:16:36 by mdeville         ###   ########.fr       */
+/*   Created: 2018/02/17 17:21:59 by mdeville          #+#    #+#             */
+/*   Updated: 2018/02/17 17:22:08 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void					prepare(t_dlist *list, t_room *begin, t_room *goal);
 t_dlist					*get_max(t_dlist *list);
 void					clean_it(t_dlist *elem);
 void					free_path(void *elem, size_t	size);
+void					ft_dlstsupp(t_dlist **alst);
 
 /*
 ** Parsing related functions

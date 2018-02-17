@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:45:48 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/29 15:50:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/17 15:21:21 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_dlist	*ft_dlstcpy(t_dlist *head)
 {
 	t_dlist *res;
 
+	res = NULL;
 	if (!head)
 		return (NULL);
 	while (head)
