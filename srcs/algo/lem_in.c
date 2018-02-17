@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/16 17:21:32 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:18:46 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,18 @@ void	antlocdel(t_dlist *antloc[])
 
 void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
 {
+	size_t	i;
 	t_dlist	*antloc[nbant + 1];
 
+	i = 0;
 	addstartend(result, start, end);
 	ft_printf("LEN = %u | PATH : \n", ft_dlstlen(LIST(result)));
 	ft_dlstiter(result, print_path);
 	setupgrp(result, antloc, nbant);
 	apply(result, antloc, end);
+	while (antloc[i])
+	{
+		free(antloc[i]);
+		i++;
+	}
 }

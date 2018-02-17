@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 16:01:01 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:22:36 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,14 +155,38 @@ int	dlstsame(const void *s1, const void *s2)
 	return ((s1 == s2) ? 0 : 1);
 }
 
+t_dlist	*ft_dlstcp(t_dlist *head)
+{
+	t_dlist *res;
+
+	res = NULL;
+	if (!head)
+		return (NULL);
+	while (head)
+	{
+		ft_dlstprepend(&res, ft_dlstnew(ROOM(head), head->content_size));
+		head = head->next;
+	}
+	return (res);
+}
+
 t_dlist	*ft_dlstdup(t_dlist *src)
 {
+	t_dlist	*res;
+	t_dlist	*tmp;
 	t_dlist	*dup;
 
 	dup = NULL;
 	while (src)
 	{
-		ft_dlstappend(&dup, ft_dlstnew(LIST(src), sizeof(t_dlist)));
+		res = NULL;
+		tmp = LIST(src);
+		while (tmp)
+		{
+			ft_dlstappend(&res, ft_dlstlink(ROOM(tmp), sizeof(*tmp)));
+			tmp = tmp->next;
+		}
+		ft_dlstprepend(&dup, ft_dlstlink(res, sizeof(t_dlist)));
 		src = src->next;
 	}
 	return (dup);
@@ -195,13 +219,12 @@ t_dlist	*group_up(t_dlist *try)
 	group = NULL;
 	while (try)
 	{
-		ft_dlstprepend(&group, ft_dlstnew(LIST(try), sizeof(*try)));
+		ft_dlstprepend(&group, ft_dlstlink(LIST(try), sizeof(*try)));
 		// if (!compatible(matrice = combi(group)))
 		// 	ft_dlstpop(&group);
 		// ft_tabdel(matrice);
 		try = try->next;
 	}
-	// ft_dlstiter(group, print_path);
 	return (group);
 }
 
@@ -311,8 +334,8 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 	try = NULL;
 	pick = 0;
 	maxpath = (ft_dlstlen(begin->neighbours) > nbant) ? nbant : ft_dlstlen(begin->neighbours);
-	while (!best || (ft_dlstlen(best) < maxpath && !mapcomplete(list, begin, goal)))
-	{
+	// while (!best || (ft_dlstlen(best) < maxpath && !mapcomplete(list, begin, goal)))
+	// {
 		if ((path = path_finding(list, begin, goal)))
 		{
 			if (!alreadyfound(try, path))
@@ -326,18 +349,21 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 				free_path(path, sizeof(*path));
 			}
 		}
-		if (pick > ft_dlstlen(begin->neighbours))
-			break ;
+		// if (pick > ft_dlstlen(begin->neighbours))
+		// 	break ;
 		// ft_dlstiter(list, print_room);
 		ft_printf("path : \n");
 		ft_dlstiter(try, print_path);
-		(score_it((group = group_up(try)), nbant) < score_it(best, nbant)) ?
-			ft_dlstsupp(&best) : ft_dlstsupp(&group);
-		if (group)
-			best = group;
+		group = group_up(try);
+		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
+		{
+			ft_dlstdel(&best, NULL);
+			best = ft_dlstdup(group);
+		}
+		ft_dlstdel(&group, NULL);
 		ft_printf("best : \n");
 		ft_dlstiter(best, print_path);
-	}
+	// }
 	ft_dlstdel(&try, free_path);
 	return (best);
 }
@@ -399,8 +425,7 @@ t_dlist	*solve(t_dlist *list, t_room *start, t_room *end, unsigned nbant)
 	goal = (begin == start) ? end : start;
 	prepare(list, begin, goal);
 	result = get_path(list, begin, goal, nbant);
-	// refaire la fonction qui reverse les listes parce qu'elle fait sauter le premier maillon
-	// if (begin == end)
-	// 	ft_dlstiter(result, reverseall);
+	if (begin == end)
+		ft_dlstiter(result, reverseall);
 	return (result);
 }

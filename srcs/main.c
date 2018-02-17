@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 16:02:50 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:17:22 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ int			main(void)
 	logger(NULL, 1);
 	result = solve(list, start, end, nbant);
 	// ft_dlstiter(list, print_room);
-	// ft_dlstiter(result, print_path);
-	// lem_in(result, nbant, start, end);
-	ft_dlstsupp(&result);
+	ft_printf("BEST PATH :\n");
+	ft_dlstiter(result, print_path);
+	lem_in(result, nbant, start, end);
+	ft_dlstdel(&result, free_path);
 	ft_dlstdel(&list, free_room);
 }

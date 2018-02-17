@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:50:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 15:58:21 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 17:23:00 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_dlist					*get_max(t_dlist *list);
 void					clean_it(t_dlist *elem);
 void					free_path(void *elem, size_t	size);
 void					ft_dlstsupp(t_dlist **alst);
+void					free_best(t_dlist *src);
 
 /*
 ** Parsing related functions
