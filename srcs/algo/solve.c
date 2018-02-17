@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:30:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 18:33:40 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:44:25 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,24 @@ size_t	mapcomplete(t_dlist *list, t_room *begin, t_room *goal)
 	return ((i >= len - 2) ? 1 : 0);
 }
 
+void	group_it(t_dlist *try, t_dlist **best, unsigned nbant)
+{
+	t_dlist	*group;
+
+	group = NULL;
+	if (score_it((group = group_up(try)), nbant) < score_it(*best, nbant))
+	{
+		ft_dlstdel(best, free_path);
+		*best = ft_dlstdup(group);
+	}
+	ft_dlstdel(&group, NULL);
+}
+
 t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 {
 	t_dlist	*path;
 	t_dlist	*try;
 	t_dlist	*best;
-	t_dlist	*group;
 	size_t	pick;
 	size_t	maxpath;
 
@@ -63,16 +75,7 @@ t_dlist	*get_path(t_dlist *list, t_room *begin, t_room *goal, unsigned nbant)
 		}
 		if (pick > ft_dlstlen(begin->neighbours))
 			break ;
-		ft_printf("path : \n");
-		ft_dlstiter(try, print_path);
-		if (score_it((group = group_up(try)), nbant) < score_it(best, nbant))
-		{
-			ft_dlstdel(&best, free_path);
-			best = ft_dlstdup(group);
-		}
-		ft_dlstdel(&group, NULL);
-		ft_printf("best : \n");
-		ft_dlstiter(best, print_path);
+		group_it(try, &best, nbant);
 	}
 	ft_dlstdel(&try, free_path);
 	return (best);

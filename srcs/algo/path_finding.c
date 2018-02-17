@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 18:20:35 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:40:35 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 		return (NULL);
 	while (1)
 	{
-		// ft_printf("lol\n");
 		min = room->neighbours;
 		if (ROOM(min) == start)
 			return (min);
@@ -86,7 +85,6 @@ t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
 			break ;
 		}
 		ROOM(tmp)->occupied++;
-		// if (end != goal)
 		ft_dlstprepend(&res, ft_dlstlink(ROOM(tmp), sizeof(end)));
 		end = ROOM(tmp);
 	}
