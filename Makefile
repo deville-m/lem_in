@@ -28,7 +28,10 @@ SRC =	main.c \
 		algo/solve.c \
 		algo/score.c \
 		algo/lem_in.c\
-		algo/group.c
+		algo/group.c \
+		algo/alreadyfound.c \
+		algo/path_cmp.c \
+		algo/prepare.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)

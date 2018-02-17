@@ -6,22 +6,11 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:47:46 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/17 18:20:35 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_dlist	*dpath_cmp(t_dlist *l1, t_dlist *l2)
-{
-	while (l1)
-	{
-		if (ROOM(l1) == ROOM(l2))
-			return (l1);
-		l1 = l1->next;
-	}
-	return (NULL);
-}
 
 size_t	possible(t_dlist *past, t_room *curr)
 {
