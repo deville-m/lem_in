@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 19:27:58 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 14:36:40 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,5 @@ void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
 	ft_dlstiter(result, print_path);
 	setupgrp(result, antloc, nbant);
 	apply(result, antloc, end);
+	antlocdel(antloc);
 }
