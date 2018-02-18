@@ -1,17 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   group.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlay <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/18 15:20:17 by vlay              #+#    #+#             */
+/*   Updated: 2018/02/18 15:21:13 by vlay             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
-
-size_t ft_strclen(const char *str, int c)
-{
-	size_t i;
-
-	i = 0;
-	while (*str)
-	{
-		if (*str++ == c)
-			i++;
-	}
-	return (i);
-}
 
 char		**combi(t_dlist *try, size_t j)
 {
@@ -42,7 +41,7 @@ char		**combi(t_dlist *try, size_t j)
 	return (matrice);
 }
 
-size_t	compatible(char **matrice)
+size_t		compatible(char **matrice)
 {
 	size_t	i;
 
@@ -58,7 +57,7 @@ size_t	compatible(char **matrice)
 	return (1);
 }
 
-t_dlist	*ft_dlstdup(t_dlist *src)
+t_dlist		*ft_dlstdup(t_dlist *src)
 {
 	t_dlist	*res;
 	t_dlist	*tmp;
@@ -80,7 +79,7 @@ t_dlist	*ft_dlstdup(t_dlist *src)
 	return (dup);
 }
 
-t_dlist	*group_up(t_dlist *try)
+t_dlist		*group_up(t_dlist *try)
 {
 	t_dlist	*group;
 	char	**matrice;

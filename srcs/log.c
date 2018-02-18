@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 17:39:01 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 18:29:46 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 15:42:03 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		logger(char *line, int mode)
 		ft_dlstiter(logger, log_print);
 	}
 	else if (line)
-		ft_dlstprepend(&logger, ft_dlstlink(ft_strdup(line), ft_strlen(line) + 1));
+		ft_dlstprepend(&logger,
+				ft_dlstlink(ft_strdup(line), ft_strlen(line) + 1));
 	if (!line)
 		ft_dlstdel(&logger, free_str);
 	return (1);

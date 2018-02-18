@@ -6,13 +6,13 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 19:07:39 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 15:23:10 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-size_t	possible(t_dlist *past, t_room *curr)
+size_t			possible(t_dlist *past, t_room *curr)
 {
 	size_t	i;
 	t_dlist	*tmp;
@@ -28,10 +28,36 @@ size_t	possible(t_dlist *past, t_room *curr)
 	return (i);
 }
 
-static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
+t_dlist			*find_min(t_room *room,
+				t_dlist *past, t_room *start, size_t limits)
+{
+	t_dlist *min;
+	t_dlist *tmp;
+
+	min = room->neighbours;
+	if (ROOM(min) == start)
+		return (min);
+	while (min && ROOM(min) != start
+		&& (find_room(past, ROOM(min)->name)
+		|| ROOM(min)->occupied > limits))
+		min = min->next;
+	tmp = (min) ? min->next : NULL;
+	while (tmp)
+	{
+		if (ROOM(tmp) == start)
+			return (tmp);
+		if ((ROOM(tmp)->occupied <= limits
+			&& ROOM(tmp)->cost < ROOM(min)->cost
+			&& !find_room(past, ROOM(tmp)->name)))
+			min = tmp;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+static	t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 {
 	size_t	limits;
-	t_dlist *tmp;
 	t_dlist *min;
 
 	limits = 0;
@@ -39,24 +65,9 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 		return (NULL);
 	while (1)
 	{
-		min = room->neighbours;
-		if (ROOM(min) == start)
+		min = find_min(room, past, start, limits);
+		if (min && ROOM(min) == start)
 			return (min);
-		while (min && ROOM(min) != start
-			&& (find_room(past, ROOM(min)->name)
-			|| ROOM(min)->occupied > limits))
-			min = min->next;
-		tmp = (min) ? min->next : NULL;
-		while (tmp)
-		{
-			if (ROOM(tmp) == start)
-				return (tmp);
-			if ((ROOM(tmp)->occupied <= limits
-				&& ROOM(tmp)->cost < ROOM(min)->cost
-				&& !find_room(past, ROOM(tmp)->name)))
-				min = tmp;
-			tmp = tmp->next;
-		}
 		if (past && min && find_room(past, ROOM(min)->name))
 			min = NULL;
 		if (min && ROOM(min)->occupied <= limits)
@@ -66,7 +77,7 @@ static t_dlist	*get_next(t_room *room, t_dlist *past, t_room *start)
 	return (min);
 }
 
-void	last_res(t_dlist **res)
+void			last_res(t_dlist **res)
 {
 	if (*res && ft_dlstlen(*res))
 	{
@@ -76,7 +87,7 @@ void	last_res(t_dlist **res)
 	}
 }
 
-t_dlist					*path_finding(t_dlist *list, t_room *start, t_room *end)
+t_dlist			*path_finding(t_dlist *list, t_room *start, t_room *end)
 {
 	t_room	*goal;
 	t_dlist	*res;

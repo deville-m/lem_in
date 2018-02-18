@@ -32,7 +32,10 @@ SRC =	main.c \
 		algo/alreadyfound.c \
 		algo/path_cmp.c \
 		algo/prepare.c \
-		algo/tab.c
+		algo/tab.c \
+		algo/ft_strclen.c \
+		algo/apply.c \
+		algo/get_path.c
 
 SRC := $(addprefix $(SRCDIR), $(SRC))
 OBJ := $(SRC:.c=.o)

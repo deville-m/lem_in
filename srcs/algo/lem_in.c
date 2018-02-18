@@ -6,13 +6,13 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/18 14:36:40 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 15:28:27 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	addstartend(t_dlist *result, t_room *start, t_room *end)
+static	void			addstartend(t_dlist *result, t_room *start, t_room *end)
 {
 	t_dlist	*add;
 	t_dlist	*tmp;
@@ -24,7 +24,7 @@ void	addstartend(t_dlist *result, t_room *start, t_room *end)
 		if (!ROOM(add))
 			ft_dlstpop(&add);
 		ft_dlstappend(&add, ft_dlstlink(end, sizeof(*end)));
-	 	tmp->content = add;
+		tmp->content = add;
 		tmp = tmp->next;
 	}
 	tmp = result;
@@ -37,29 +37,11 @@ void	addstartend(t_dlist *result, t_room *start, t_room *end)
 	}
 }
 
-void	setupgrp(t_dlist *result, t_dlist *antloc[], unsigned nbant)
+static	inline	void	set_secondphase(t_dlist *result,
+						unsigned nbant, size_t j, t_dlist *antloc[])
 {
 	t_dlist	*tmp;
-	size_t	maxlen;
-	size_t	i;
-	size_t	j;
 
-	ft_printf("nbant = %u | maxlen = %u\n", nbant, maxlen = ft_dlstlen(get_max(result)) - 2);
-	j = 0;
-	tmp = result;
-	antloc[j] = NULL;
-	while (nbant && tmp)
-	{
-		i = 0;
-		while (nbant && i < maxlen - (ft_dlstlen(LIST(tmp)) - 2))
-		{
-			ft_dlstprepend(&antloc[j + i++], ft_dlstlink(LIST(tmp), sizeof(*tmp)));
-			antloc[j + i] = NULL;
-			nbant--;
-		}
-		j += i;
-		tmp = tmp->next;
-	}
 	tmp = result;
 	while (nbant)
 	{
@@ -72,52 +54,35 @@ void	setupgrp(t_dlist *result, t_dlist *antloc[], unsigned nbant)
 	}
 }
 
-void	clean_it(t_dlist *elem)
-{
-	ROOM(elem)->in = 0;
-}
-
-void	apply(t_dlist *result, t_dlist *antloc[], t_room *end)
+void					setupgrp(t_dlist *result,
+						t_dlist *antloc[], unsigned nbant)
 {
 	t_dlist	*tmp;
-	size_t	j;
+	size_t	maxlen;
 	size_t	i;
-	char	chg;
+	size_t	j;
 
-	i = 0;
-	while (antloc[i])
+	maxlen = ft_dlstlen(get_max(result)) - 2;
+	j = 0;
+	tmp = result;
+	antloc[j] = NULL;
+	while (nbant && tmp)
 	{
-		chg = 0;
-		j = i;
-		while (antloc[j])
+		i = 0;
+		while (nbant && i < maxlen - (ft_dlstlen(LIST(tmp)) - 2))
 		{
-			if (LIST(antloc[j])
-				&& ROOM(LIST(antloc[j])) != end
-				&& ROOM(LIST(antloc[j])->next)->in == 0)
-			{
-				// ft_printf("before = %s ", ROOM(LIST(antloc[j]))->name);
-				antloc[j]->content = LIST(antloc[j])->next;
-				ft_printf("L%u-%s ", j + 1, ROOM(LIST(antloc[j]))->name);
-				if (ROOM(LIST(antloc[j])) != end)
-					ROOM(LIST(antloc[j]))->in = 1;
-				chg++;
-			}
-			j++;
+			ft_dlstprepend(&antloc[j + i++],
+					ft_dlstlink(LIST(tmp), sizeof(*tmp)));
+			antloc[j + i] = NULL;
+			nbant--;
 		}
-		if (chg)
-			ft_printf("\n");
-		tmp = result;
-		while (tmp)
-		{
-			ft_dlstiter(LIST(tmp), clean_it);
-			tmp = tmp->next;
-		}
-		if (ROOM(LIST(antloc[i])) == end)
-			i++;
+		j += i;
+		tmp = tmp->next;
 	}
+	set_secondphase(result, nbant, j, antloc);
 }
 
-void	antlocdel(t_dlist *antloc[])
+void					antlocdel(t_dlist *antloc[])
 {
 	size_t	i;
 
@@ -129,14 +94,13 @@ void	antlocdel(t_dlist *antloc[])
 	}
 }
 
-void	lem_in(t_dlist *result, unsigned int nbant, t_room *start, t_room *end)
+void					lem_in(t_dlist *result, unsigned int nbant,
+						t_room *start, t_room *end)
 {
 	t_dlist	*antloc[nbant + 1];
 
 	addstartend(result, start, end);
-	ft_printf("LEN = %u | PATH : \n", ft_dlstlen(LIST(result)));
-	ft_dlstiter(result, print_path);
 	setupgrp(result, antloc, nbant);
-	apply(result, antloc, end);
+	apply(antloc, end);
 	antlocdel(antloc);
 }

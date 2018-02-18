@@ -6,15 +6,15 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:58:24 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/22 21:08:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/18 15:19:48 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	print_tab(t_room **tab)
+static	void		print_tab(t_room **tab)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (tab[i])
@@ -22,18 +22,18 @@ static void	print_tab(t_room **tab)
 	ft_printf("\n");
 }
 
-static void		swap(t_room **e1, t_room **e2)
+static	void		swap(t_room **e1, t_room **e2)
 {
-	t_room *tmp;
+	t_room	*tmp;
 
 	tmp = *e1;
 	*e1 = *e2;
 	*e2 = tmp;
 }
 
-void	generate(size_t n, t_room *tab[])
+void				generate(size_t n, t_room *tab[])
 {
-	size_t i;
+	size_t	i;
 
 	if (n == 1)
 		print_tab(tab);
