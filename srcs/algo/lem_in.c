@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 20:25:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/18 15:28:27 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 17:55:11 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,13 @@ void					antlocdel(t_dlist *antloc[])
 void					lem_in(t_dlist *result, unsigned int nbant,
 						t_room *start, t_room *end)
 {
-	t_dlist	*antloc[nbant + 1];
+	t_dlist	**antloc;
 
+	if (!(antloc = (t_dlist **)malloc(sizeof(t_dlist *) * (nbant + 1))))
+		return ;
 	addstartend(result, start, end);
 	setupgrp(result, antloc, nbant);
 	apply(antloc, end);
 	antlocdel(antloc);
+	free(antloc);
 }
