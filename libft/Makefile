@@ -6,12 +6,12 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2018/02/14 21:31:44 by mdeville         ###   ########.fr        #
+#    Updated: 2018/02/18 17:28:52 by mdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = libft.a
-CFLAGS         += -Wall -Wextra -Werror
+CFLAGS         += -Wall -Wextra -Werror -O3
 SRCDIR          = srcs/
 OBJDIR          = .obj/
 INCDIR          = includes/

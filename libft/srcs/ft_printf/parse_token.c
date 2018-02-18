@@ -6,14 +6,13 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 14:36:20 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/17 22:04:19 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:32:41 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "conversion.h"
 #include "ft_printf.h"
 #include "ft_string.h"
-#include <stdio.h>
 
 static int	parse_length(const char *s, t_token *token)
 {
