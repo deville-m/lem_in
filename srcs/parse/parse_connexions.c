@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 17:12:01 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:19:20 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:27:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ static int	first(t_dlist *list, char *line)
 
 	if (norm)
 		return (norm);
-	else if (is_valid_connexion(list, line))
+	else if (logger(line, 0) && is_valid_connexion(list, line))
 	{
-		logger(line, 0);
 		parse_connexion(list, line);
 		norm = 1;
 	}
