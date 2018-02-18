@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 17:21:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/18 15:39:35 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/18 16:35:20 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "get_next_line.h"
 # include "conversion.h"
 # include "ft_printf.h"
+# define ROOM(x) ((t_room *)x->content)
+# define LIST(x) ((t_dlist *)x->content)
 
 typedef struct					s_room
 {
@@ -31,9 +33,6 @@ typedef struct					s_room
 	t_dlist						*neighbours;
 	t_dlist						*removed;
 }								t_room;
-
-# define	ROOM(x) ((t_room *)x->content)
-# define	LIST(x) ((t_dlist *)x->content)
 
 /*
 ** Graph related functions
@@ -94,7 +93,6 @@ void							print_path(t_dlist *elem);
 void							print_room(t_dlist *room);
 void							print_elem(t_dlist *elem);
 
-
 /*
 ** Algo
 */
@@ -110,8 +108,6 @@ t_room							*path_cmp(t_dlist *l1, t_dlist *l2);
 t_dlist							*get_max(t_dlist *list);
 t_dlist							*ft_dlstdup(t_dlist *src);
 void							apply(t_dlist *antloc[], t_room *end);
-
-
 char							**ft_tabcpy(char **tab, size_t hauteur);
 size_t							ft_tabheight(char **tab);
 void							ft_tabdel(char **tab);
