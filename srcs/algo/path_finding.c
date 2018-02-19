@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 18:52:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/18 15:23:10 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/19 23:49:14 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,12 @@ void			last_res(t_dlist **res)
 
 t_dlist			*path_finding(t_dlist *list, t_room *start, t_room *end)
 {
-	t_room	*goal;
 	t_dlist	*res;
 	t_dlist	*tmp;
 
 	if (!list || !start || !end)
 		return (NULL);
 	res = NULL;
-	goal = end;
 	disconnect(end);
 	while (end != start)
 	{

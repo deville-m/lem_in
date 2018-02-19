@@ -6,7 +6,7 @@
 /*   By: vlay <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:21:20 by vlay              #+#    #+#             */
-/*   Updated: 2018/02/18 15:21:28 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/19 23:49:00 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ char	**ft_tabcpy(char **tab, size_t hauteur)
 {
 	char	**cpy;
 	size_t	j;
-	size_t	i;
 
 	j = 0;
 	cpy = (char **)malloc(sizeof(char *) * (hauteur + 1));
 	while (tab[j])
 	{
-		i = 0;
 		cpy[j] = ft_strdup(tab[j]);
 		j++;
 	}

@@ -6,11 +6,12 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2018/02/18 17:28:52 by mdeville         ###   ########.fr        #
+#    Updated: 2018/02/19 23:47:23 by mdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = libft.a
+CC              = gcc
 CFLAGS         += -Wall -Wextra -Werror -O3
 SRCDIR          = srcs/
 OBJDIR          = .obj/
