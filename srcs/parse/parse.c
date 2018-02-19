@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/17 17:16:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/19 21:43:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void			parse_command(
 	int command;
 
 	command = is_command(line);
+	free(line);
 	if (command == 3)
 		return ;
-	free(line);
 	while (get_next_line(0, &line) == 1 && logger(line, 0)
 		&& (is_comment(line) || is_command(line) == 3))
 		free(line);
