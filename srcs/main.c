@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 17:13:00 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/19 21:44:54 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/20 16:46:47 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int			main(void)
 		return (1);
 	}
 	logger(NULL, 1);
+	write(1, "\n", 1);
 	result = solve(list, start, end, nbant);
 	lem_in(result, nbant, start, end);
 	ft_dlstdel(&result, free_path);
