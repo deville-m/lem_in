@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 09:48:41 by mdeville          #+#    #+#             */
-/*   Updated: 2018/02/19 21:43:15 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/02/20 20:41:12 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_dlist				*parse(t_room **start, t_room **end)
 		else if (is_command(line))
 			parse_command(&list, line, start, end);
 		else
-			comment(line);
+			free(line);
 	}
 	parse_connexions(list, line);
 	return (list);
