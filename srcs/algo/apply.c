@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlay <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: vlay <vlay@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:26:22 by vlay              #+#    #+#             */
-/*   Updated: 2018/02/18 15:26:32 by vlay             ###   ########.fr       */
+/*   Updated: 2018/02/23 17:20:26 by vlay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	inline	void	move(t_dlist *antloc[], t_room *end, size_t j)
 		{
 			ROOM(LIST(antloc[j]))->in = 0;
 			antloc[j]->content = LIST(antloc[j])->next;
-			ft_printf("L%u-%s ", j + 1, ROOM(LIST(antloc[j]))->name);
+			ft_printf("L%u-%s%c", j + 1, ROOM(LIST(antloc[j]))->name, (chg) ? ' ' : '\0');
 			if (ROOM(LIST(antloc[j])) != end)
 				ROOM(LIST(antloc[j]))->in = 1;
 			chg++;
